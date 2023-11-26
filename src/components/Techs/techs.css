@@ -1,0 +1,15 @@
+.techs {
+    background-color: #272727;
+    padding: 100px 70px;
+    color: #fff;
+}
+
+.techs__title {
+    margin: 0;
+    padding: 0 0 23px;
+    border-bottom: solid 1px #dadada;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
