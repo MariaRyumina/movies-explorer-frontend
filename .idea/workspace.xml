@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b064fa29-2dcf-4974-974b-33ea694570f2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Main/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Techs/Techs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Techs/Techs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Techs/techs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Techs/techs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutMe/aboutMe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutMe/aboutMe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Techs/Techs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Techs/Techs.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +84,8 @@
       <workItem from="1700730352250" duration="16043000" />
       <workItem from="1700891739900" duration="13836000" />
       <workItem from="1700982326459" duration="12374000" />
-      <workItem from="1701066869704" duration="9036000" />
+      <workItem from="1701066869704" duration="9305000" />
+      <workItem from="1701154660635" duration="16419000" />
     </task>
     <servers />
   </component>

@@ -15,7 +15,7 @@ export default function AboutMe() {
                         С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке,
                         начал заниматься фриланс-заказами и ушёл с постоянной работы.
                     </p>
-                    <a href="#" target="_blank" className="aboutMe__github-link">Github</a>
+                    <a href="https://github.com/MariaRyumina" target="_blank" className="aboutMe__github-link">Github</a>
                 </div>
                 <img src={imgMe} alt="аватар" className="aboutMe__avatar" />
             </div>
