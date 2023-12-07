@@ -1,34 +1,33 @@
-.movieCard {
-    margin: 70px 70px 0;
+.savedMovies {
+    margin: 80px 70px 0;
     display: grid;
-    justify-content: center;
     grid-template-columns: repeat(auto-fit, min(270px));
     gap: 38px 20px;
 }
 
-.movieCard__container {
+.savedMovies__container {
     display: grid;
     justify-content: space-between;
     align-items: start;
     grid-template-columns: auto 24px;
     grid-template-areas:
     "image image"
-    "name like"
+    "name delete"
     "duration duration";
 }
 
-.movie__img {
+.savedMovies__img {
     grid-area: image;
     width: 100%;
     margin-bottom: 10px;
 }
 
-.movie__like {
-    grid-area: like;
+.savedMovies__delete {
+    grid-area: delete;
     align-self: start;
 }
 
-.movie__name {
+.savedMovies__name {
     grid-area: name;
     height: 45px;
     margin: 4px 20px 0 0;
@@ -38,7 +37,7 @@
     line-height: normal;
 }
 
-.movie__duration {
+.savedMovies__duration {
     grid-area: duration;
     border-top: solid 1px #424242;
     padding-top: 6px;

@@ -1,4 +1,5 @@
 .filter-checkbox {
+    position: relative;
     padding: 0 30px 0 29px;
 }
 
@@ -29,27 +30,23 @@
     content: "";
     position: absolute;
     left: 0;
-    top: 0;
+    top: -1.5px;
     width: 36px;
     height: 20px;
-    background-color: #343434;
-    border-radius: 10px;
 }
 
 .checkbox__span:after {
     display: block;
     content: "";
     position: absolute;
-    left: 1px;
-    top: 1px;
-    width: 18px;
-    height: 18px;
-    border-radius: 9px;
-    background-color: #A0A0A0;
-    transition: background-color .3s, left .3s;
+    left: 0;
+    top: -1.5px;
+    width: 36px;
+    height: 20px;
+    background-image: url("../../images/checkbox_on.svg");
+    transition: background-image .3s, left .2s;
 }
 
 .checkbox__input:checked + .checkbox__span:after {
-    background-color: #2BE080;
-    left: 17px;
+    background-image: url("../../images/checkbox_off.svg");
 }

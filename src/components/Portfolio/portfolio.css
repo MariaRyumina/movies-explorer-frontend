@@ -1,10 +1,11 @@
 .portfolio {
-    padding: 101px 70px 125px;
+    padding: 101px 70px 105px;
     color: #fff;
 }
 
 .portfolio__title {
-    margin: 0 0 30px;
+    margin: 0;
+    padding: 0 0 30px;
     color: #8B8B8B;
     font-size: 18px;
     font-weight: 400;
@@ -12,7 +13,7 @@
 }
 
 .portfolio__link {
-    margin: 20px 0 0;
+    padding: 20px 0 19px;
     color: #fff;
     text-decoration: none;
     border-bottom: solid 1px #424242;
@@ -22,6 +23,7 @@
     letter-spacing: -1.2px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .portfolio__link:last-of-type {

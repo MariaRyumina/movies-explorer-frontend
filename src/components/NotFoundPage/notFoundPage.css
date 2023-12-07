@@ -1,0 +1,32 @@
+.notFoundPage {
+    padding: 246px 0 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notFoundPage__error {
+    margin: 0;
+    font-size: 140px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.notFoundPage__text {
+    margin: 4px 0 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.notFoundPage__back {
+    cursor: pointer;
+    margin: 184px 0 0;
+    color: #4285F4;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}

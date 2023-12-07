@@ -1,4 +1,3 @@
-import React from 'react';
 import './filterCheckbox.css';
 
 export default function FilterCheckbox() {

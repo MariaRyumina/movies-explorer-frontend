@@ -1,4 +1,3 @@
-import React from 'react';
 import './aboutMe.css';
 import imgMe from '../../images/me.png';
 
@@ -10,7 +9,8 @@ export default function AboutMe() {
                 <div>
                     <p className="aboutMe__name">Мария</p>
                     <p className="aboutMe__about">Фронтенд-разработчик, 28 лет</p>
-                    <p className="aboutMe__description">Я родился и живу в Саратове, закончил факультет экономики СГУ.
+                    <p className="aboutMe__description">
+                        Я родился и живу в Саратове, закончил факультет экономики СГУ.
                         У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
                         С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке,
                         начал заниматься фриланс-заказами и ушёл с постоянной работы.

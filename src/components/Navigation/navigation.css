@@ -21,9 +21,10 @@
 }
 
 .navigation__links-profile {
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 }
 
 .navigation__link-profile {
@@ -36,11 +37,12 @@
 }
 
 .navigation__logo-profile {
+    display: inline-block;
+    background: rgba(255, 255, 255, .1);
     border-radius: 50px;
     padding: 7px;
-    background: #0F4157;
+    margin-right: 3px;
 }
-
 
 .navigation__unauth {
     display: flex;

@@ -6,12 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="b064fa29-2dcf-4974-974b-33ea694570f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FilterCheckbox/FilterCheckbox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FilterCheckbox/FilterCheckbox.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FilterCheckbox/filterCheckbox.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FilterCheckbox/filterCheckbox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MoviesCard/MoviesCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCard/MoviesCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MoviesCard/moviesCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCard/moviesCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MoviesCardList/MoviesCardList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCardList/MoviesCardList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MoviesCardList/moviesCardList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCardList/moviesCardList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navigation/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Portfolio/portfolio.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Portfolio/portfolio.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Techs/techs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Techs/techs.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +98,13 @@
       <workItem from="1701066869704" duration="9305000" />
       <workItem from="1701154660635" duration="16494000" />
       <workItem from="1701241647211" duration="10929000" />
-      <workItem from="1701277215869" duration="4199000" />
+      <workItem from="1701277215869" duration="4245000" />
+      <workItem from="1701332992967" duration="7750000" />
+      <workItem from="1701412301999" duration="8154000" />
+      <workItem from="1701500811709" duration="11259000" />
+      <workItem from="1701674113375" duration="19835000" />
+      <workItem from="1701846588176" duration="16256000" />
+      <workItem from="1701933470719" duration="19898000" />
     </task>
     <servers />
   </component>

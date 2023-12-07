@@ -1,0 +1,21 @@
+.moviesCardList {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.moviesCardList__more {
+    align-self: center;
+    margin: 60px auto 80px;
+    padding: 11px 0;
+    width: 320px;
+    background-color: #2f2f2f;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+}
