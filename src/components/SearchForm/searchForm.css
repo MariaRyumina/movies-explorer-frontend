@@ -52,3 +52,14 @@
     font-weight: 500;
     line-height: 18px; /* 163.636% */
 }
+
+@media screen and (max-width: 768px) {
+    .search {
+        margin: 80px 30px 10px;
+        padding-bottom: 109px;
+    }
+
+    .search__btn {
+        right: 19px;
+    }
+}

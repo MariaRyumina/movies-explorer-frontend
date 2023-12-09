@@ -1,4 +1,5 @@
 .navigation__auth {
+    padding-right: 70px;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -45,6 +46,7 @@
 }
 
 .navigation__unauth {
+    padding-right: 70px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -67,4 +69,21 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 16px; /* 133.333% */
+}
+
+@media screen and (max-width: 1024px){
+    .navigation__unauth {
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .navigation__signup {
+        font-size: 10px;
+    }
+
+    .navigation__signin {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
 }

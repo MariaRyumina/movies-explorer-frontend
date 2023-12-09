@@ -1,7 +1,6 @@
 .moviesCardList {
     display: flex;
     flex-direction: column;
-
 }
 
 .moviesCardList__more {

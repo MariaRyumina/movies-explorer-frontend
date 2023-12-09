@@ -50,3 +50,9 @@
 .checkbox__input:checked + .checkbox__span:after {
     background-image: url("../../images/checkbox_off.svg");
 }
+
+@media screen and (max-width: 768px) {
+    .filter-checkbox {
+        padding: 0 20px;
+    }
+}

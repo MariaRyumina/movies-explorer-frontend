@@ -18,3 +18,28 @@
     margin-left: auto;
     margin-top: 102px;
 }
+
+@media screen and (max-width: 1024px) {
+    .promo {
+        padding: 50px 44px 60px;
+    }
+
+    .promo__logo {
+        width: 680px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .promo {
+        padding: 300px 44px 70px;
+    }
+
+    .promo__title {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .promo__logo {
+        margin-top: 140px;
+    }
+}

@@ -6,24 +6,29 @@
   <component name="ChangeListManager">
     <list default="true" id="b064fa29-2dcf-4974-974b-33ea694570f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutMe/AboutMe.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AboutMe/aboutMe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutMe/aboutMe.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FilterCheckbox/FilterCheckbox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FilterCheckbox/FilterCheckbox.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FilterCheckbox/filterCheckbox.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FilterCheckbox/filterCheckbox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Movies/Movies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Movies/Movies.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MoviesCard/MoviesCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCard/MoviesCard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MoviesCard/moviesCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCard/moviesCard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MoviesCardList/MoviesCardList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCardList/MoviesCardList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MoviesCardList/moviesCardList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCardList/moviesCardList.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NotFoundPage/notFoundPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NotFoundPage/notFoundPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Portfolio/portfolio.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Portfolio/portfolio.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/SearchForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Promo/Promo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Promo/Promo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Promo/promo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Promo/promo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Register/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register/register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SavedMovies/savedMovies.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SavedMovies/savedMovies.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchForm/searchForm.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Techs/techs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Techs/techs.css" afterDir="false" />
     </list>
@@ -104,7 +109,9 @@
       <workItem from="1701500811709" duration="11259000" />
       <workItem from="1701674113375" duration="19835000" />
       <workItem from="1701846588176" duration="16256000" />
-      <workItem from="1701933470719" duration="19898000" />
+      <workItem from="1701933470719" duration="26746000" />
+      <workItem from="1702030487836" duration="9484000" />
+      <workItem from="1702101090795" duration="6967000" />
     </task>
     <servers />
   </component>

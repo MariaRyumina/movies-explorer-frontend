@@ -1,4 +1,5 @@
 import React from 'react';
+import './main.css';
 import Promo from "../Promo/Promo";
 import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
@@ -7,7 +8,7 @@ import Portfolio from "../Portfolio/Portfolio";
 
 export default function Main() {
     return (
-        <main className="content">
+        <main className="main">
             <Promo />
             <AboutProject />
             <Techs />

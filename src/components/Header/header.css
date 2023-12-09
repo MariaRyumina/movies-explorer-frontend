@@ -1,6 +1,8 @@
 .header {
+    margin: 0 auto;
+    max-width: 1280px;
     background-color: transparent;
-    padding: 18px 70px;
+    padding: 18px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,6 +14,23 @@
 }
 
 .logo {
+    padding-left: 70px;
     width: 38px;
     height: 38px;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 18px 30px;
+    }
+
+    .logo {
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header {
+        padding: 18px 14px;
+    }
 }

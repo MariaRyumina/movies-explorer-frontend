@@ -62,7 +62,43 @@
     border-radius: 10px;
 }
 
+@media screen and (max-width: 1024px) {
+    .aboutMe {
+        padding: 90px 50px 0;
+    }
+}
 
+@media screen and (max-width: 768px) {
+    .aboutMe__name {
+        font-size: 40px;
+        line-height: 40px; /* 100% */
+        letter-spacing: -1.6px;
+    }
+
+    .aboutMe__about {
+        margin-top: 16px;
+        font-size: 12px;
+        line-height: 18px; /* 150% */
+    }
+
+    .aboutMe__description {
+        margin-top: 20px;
+        font-size: 12px;
+        line-height: 18px; /* 150% */
+    }
+
+    .aboutMe__avatar {
+        width: 255px;
+        height: 307px;
+    }
+
+    .aboutMe__github-link {
+        margin-top: 87px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: normal;
+    }
+}
 
 
 

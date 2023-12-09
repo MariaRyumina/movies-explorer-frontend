@@ -47,3 +47,15 @@
     font-weight: 400;
     line-height: normal;
 }
+
+@media screen and (max-width: 768px) {
+    .movieCard {
+        margin: 70px 30px 0;
+        grid-template-columns: repeat(auto-fit, min(339px));
+        gap: 30px;
+    }
+
+    .movie__name {
+        margin: 4.5px 20px 0 0;
+    }
+}

@@ -30,3 +30,9 @@
     font-weight: 400;
     line-height: normal;
 }
+
+@media screen and (max-width: 768px) {
+    .notFoundPage {
+        padding: 408px 0 232px;
+    }
+}

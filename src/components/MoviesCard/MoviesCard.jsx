@@ -17,8 +17,10 @@ import movie13 from '../../images/movie13.png';
 import movie14 from '../../images/movie14.png';
 import movie15 from '../../images/movie15.png';
 import movie16 from '../../images/movie16.png';
+import React from "react";
 
 export default function MoviesCard() {
+
     return (
         <section className="movieCard">
             <div className="movieCard__container">
@@ -69,54 +71,62 @@ export default function MoviesCard() {
                 <img src={dislikeIcon} alt="like movie" className="movie__like" />
                 <div className="movie__duration">1ч 42м</div>
             </div>
-            <div className="movieCard__container">
-                <img src={movie09} alt="" className="movie__img" />
-                <h3 className="movie__name">Дженис: Маленькая девочка грустит</h3>
-                <img src={likeIcon} alt="like movie" className="movie__like movie__like_active" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie10} alt="" className="movie__img" />
-                <h3 className="movie__name">Соберись перед прыжком</h3>
-                <img src={dislikeIcon} alt="like movie" className="movie__like" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie11} alt="" className="movie__img" />
-                <h3 className="movie__name">Пи Джей Харви: A dog called money</h3>
-                <img src={dislikeIcon} alt="like movie" className="movie__like" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie12} alt="" className="movie__img" />
-                <h3 className="movie__name">По волнам: Искусство звука в кино</h3>
-                <img src={dislikeIcon} alt="like movie" className="movie__like" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie13} alt="" className="movie__img" />
-                <h3 className="movie__name">Рудбой</h3>
-                <img src={dislikeIcon} alt="like movie" className="movie__like" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie14} alt="" className="movie__img" />
-                <h3 className="movie__name">Скейт — кухня</h3>
-                <img src={dislikeIcon} alt="like movie" className="movie__like" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie15} alt="" className="movie__img" />
-                <h3 className="movie__name">Война искусств</h3>
-                <img src={dislikeIcon} alt="like movie" className="movie__like" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
-            <div className="movieCard__container">
-                <img src={movie16} alt="" className="movie__img" />
-                <h3 className="movie__name">Зона</h3>
-                <img src={likeIcon} alt="like movie" className="movie__like movie__like_active" />
-                <div className="movie__duration">1ч 42м</div>
-            </div>
+
+            { (window.matchMedia("(min-width: 769px)").matches)
+                &&
+            <>
+                <div className="movieCard__container">
+                    <img src={movie09} alt="" className="movie__img" />
+                    <h3 className="movie__name">Дженис: Маленькая девочка грустит</h3>
+                    <img src={likeIcon} alt="like movie" className="movie__like movie__like_active" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie10} alt="" className="movie__img" />
+                    <h3 className="movie__name">Соберись перед прыжком</h3>
+                    <img src={dislikeIcon} alt="like movie" className="movie__like" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie11} alt="" className="movie__img" />
+                    <h3 className="movie__name">Пи Джей Харви: A dog called money</h3>
+                    <img src={dislikeIcon} alt="like movie" className="movie__like" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie12} alt="" className="movie__img" />
+                    <h3 className="movie__name">По волнам: Искусство звука в кино</h3>
+                    <img src={dislikeIcon} alt="like movie" className="movie__like" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie13} alt="" className="movie__img" />
+                    <h3 className="movie__name">Рудбой</h3>
+                    <img src={dislikeIcon} alt="like movie" className="movie__like" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie14} alt="" className="movie__img" />
+                    <h3 className="movie__name">Скейт — кухня</h3>
+                    <img src={dislikeIcon} alt="like movie" className="movie__like" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie15} alt="" className="movie__img" />
+                    <h3 className="movie__name">Война искусств</h3>
+                    <img src={dislikeIcon} alt="like movie" className="movie__like" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+                <div className="movieCard__container">
+                    <img src={movie16} alt="" className="movie__img" />
+                    <h3 className="movie__name">Зона</h3>
+                    <img src={likeIcon} alt="like movie" className="movie__like movie__like_active" />
+                    <div className="movie__duration">1ч 42м</div>
+                </div>
+            </>
+            }
+
+
         </section>
     )
 }

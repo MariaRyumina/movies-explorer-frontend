@@ -1,6 +1,6 @@
 .profile {
-    width: 410px;
-    margin: 74px auto 70px;
+    margin: 74px auto 0;
+    padding-bottom: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,4 +90,19 @@
     font-size: 13px;
     font-weight: 500;
     line-height: normal;
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        margin: 236px auto 0;
+        padding-bottom: 269px;
+    }
+
+    .profile__form {
+        margin: 88px 0 0;
+    }
+
+    .profile__label-email {
+        margin-bottom: 209px;
+    }
 }
