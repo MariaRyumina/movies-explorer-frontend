@@ -20,12 +20,8 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .promo {
-        padding: 50px 44px 60px;
-    }
-
     .promo__logo {
-        width: 680px;
+        width: 628px;
     }
 }
 
@@ -40,6 +36,17 @@
     }
 
     .promo__logo {
+        width: 680px;
         margin-top: 140px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .promo__title {
+        text-align: center;
+        margin: 0 auto;
+        line-height: 39px; /* 125.806% */
+        letter-spacing: -1.24px;
+        font-size: calc(31px + 9 * (100vw - 320px) / 447); /* размер текста будет уменьшаться пропорционально размеру окна */
     }
 }
