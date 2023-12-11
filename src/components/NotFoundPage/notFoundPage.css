@@ -23,6 +23,8 @@
 }
 
 .notFoundPage__back {
+    border: none;
+    background: transparent;
     cursor: pointer;
     margin: 184px 0 0;
     color: #4285F4;

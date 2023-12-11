@@ -42,11 +42,23 @@
 }
 
 @media screen and (max-width: 767px) {
+    .promo {
+        padding: 183px 0 40px;
+    }
+
     .promo__title {
+        padding: 0 10px;
         text-align: center;
         margin: 0 auto;
         line-height: 39px; /* 125.806% */
         letter-spacing: -1.24px;
         font-size: calc(31px + 9 * (100vw - 320px) / 447); /* размер текста будет уменьшаться пропорционально размеру окна */
+    }
+
+    .promo__logo {
+        height: 230px;
+        width: 100%;
+        object-fit: cover;
+        margin-top: 60px;
     }
 }

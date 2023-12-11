@@ -6,22 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b064fa29-2dcf-4974-974b-33ea694570f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AboutMe/aboutMe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutMe/aboutMe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/AboutProject.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AboutProject/aboutProject.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MoviesCard/moviesCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MoviesCard/moviesCard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/Navigation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navigation/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navigation/navigation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Portfolio/portfolio.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Portfolio/portfolio.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NotFoundPage/NotFoundPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NotFoundPage/NotFoundPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NotFoundPage/notFoundPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NotFoundPage/notFoundPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Promo/promo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Promo/promo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Register/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register/Register.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Register/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register/register.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SavedMovies/savedMovies.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SavedMovies/savedMovies.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Techs/techs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Techs/techs.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +94,8 @@
       <workItem from="1701933470719" duration="26746000" />
       <workItem from="1702030487836" duration="9484000" />
       <workItem from="1702101090795" duration="7459000" />
-      <workItem from="1702195395064" duration="12963000" />
+      <workItem from="1702195395064" duration="13854000" />
+      <workItem from="1702281566532" duration="11726000" />
     </task>
     <servers />
   </component>

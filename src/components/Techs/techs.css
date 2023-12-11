@@ -85,3 +85,39 @@
         letter-spacing: -0.48px;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .techs {
+        padding: 70px 18px;
+    }
+
+    .techs__title {
+        padding: 0 0 28px;
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .techs__subtitle {
+        margin: 60px 0 0;
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+    }
+
+    .techs__paragraph {
+        margin: 24px 0 0;
+        font-size: 11px;
+        line-height: 16px; /* 145.455% */
+        letter-spacing: -0.44px;
+    }
+
+    .techs__list {
+        flex-wrap: wrap;
+        justify-content: start;
+        margin-top: 50px;
+        padding: 0 53px 0;
+    }
+
+    .techs__list_item {
+    }
+}

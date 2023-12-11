@@ -82,6 +82,10 @@
 }
 
 @media screen and (max-width: 320px) {
+    .navigation__unauth {
+        gap: 14px;
+    }
+
     .navigation__signup {
         font-size: 10px;
     }

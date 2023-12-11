@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import profileLogoImg from '../../images/icon_user.svg';
 
 export default function Navigation() {
-    const [loggedIn, setLoggedIn] = React.useState(true); //вошёл пользователь в систему или нет
+    const [loggedIn, setLoggedIn] = React.useState(false); //вошёл пользователь в систему или нет
 
     return (
         <>
