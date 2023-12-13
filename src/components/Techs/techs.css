@@ -6,7 +6,7 @@
 
 .techs__title {
     margin: 0;
-    padding: 0 0 23px;
+    padding: 0 0 22px;
     border-bottom: solid 1px #dadada;
     font-size: 22px;
     font-weight: 400;
@@ -114,10 +114,7 @@
     .techs__list {
         flex-wrap: wrap;
         justify-content: start;
-        margin-top: 50px;
+        margin: 50px auto 0;
         padding: 0 53px 0;
-    }
-
-    .techs__list_item {
     }
 }

@@ -81,7 +81,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
     .navigation__unauth {
         gap: 14px;
     }

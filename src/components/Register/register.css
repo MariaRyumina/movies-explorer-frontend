@@ -104,3 +104,37 @@
         align-items: center;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .register {
+        width: 260px;
+        padding: 56px 30px 30px;
+    }
+
+    .register__logo {
+        align-self: center;
+    }
+
+    .register__title {
+        align-self: center;
+        margin: 49px 0 0;
+    }
+
+    .register__form {
+        margin: 77px 0 0;
+    }
+
+    .register__button {
+        width: 260px;
+        margin-top: 240px;
+        font-size: 12px;
+    }
+
+    .register__subtitle {
+        font-size: 12px;
+    }
+
+    .register__subtitle-link {
+        font-size: 12px;
+    }
+}

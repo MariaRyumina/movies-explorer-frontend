@@ -56,9 +56,14 @@
     }
 
     .promo__logo {
-        height: 230px;
         width: 100%;
-        object-fit: cover;
         margin-top: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .promo__logo {
+        height: 230px;
+        object-fit: cover;
     }
 }

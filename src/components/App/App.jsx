@@ -15,61 +15,62 @@ function App() {
 
     return (
         <div className="page">
+            <div className="content">
+                { ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname)
+                    && <Header />
+                }
 
-            { ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname)
-                && <Header />
-            }
+                <Routes>
+                    <Route
+                        path='/*'
+                        element={
+                            <NotFoundPage />
+                        }
+                    />
+                    <Route
+                        path='/'
+                        element={
+                            <Main />
+                        }
+                    />
+                    <Route
+                        path='/movies'
+                        element={
+                            <Movies />
+                        }
+                    />
+                    <Route
+                        path='/saved-movies'
+                        element={
+                            <SavedMovies />
+                        }
+                    />
+                    <Route
+                        path='/signin'
+                        element={
+                            <Login />
+                        }
+                    />
+                    <Route
+                        path='/signup'
+                        element={
+                            <Register />
+                        }
+                    />
+                    <Route
+                        path='/profile'
+                        element={
+                            <Profile />
+                        }
+                    />
+                </Routes>
 
-            <Routes>
-                <Route
-                    path='/*'
-                    element={
-                        <NotFoundPage />
-                    }
-                />
-                <Route
-                    path='/'
-                    element={
-                        <Main />
-                    }
-                />
-                <Route
-                    path='/movies'
-                    element={
-                        <Movies />
-                    }
-                />
-                <Route
-                    path='/saved-movies'
-                    element={
-                        <SavedMovies />
-                    }
-                />
-                <Route
-                    path='/signin'
-                    element={
-                        <Login />
-                    }
-                />
-                <Route
-                    path='/signup'
-                    element={
-                        <Register />
-                    }
-                />
-                <Route
-                    path='/profile'
-                    element={
-                        <Profile />
-                    }
-                />
-            </Routes>
-
-            { (location.pathname === '/' ||
-                    location.pathname === '/movies' ||
-                    location.pathname === '/saved-movies')
-                && <Footer />
-            }
+                { (location.pathname === '/' ||
+                        location.pathname === '/movies' ||
+                        location.pathname === '/saved-movies')
+                    && <Footer />
+                }
+            </div>
         </div>
     )
 }

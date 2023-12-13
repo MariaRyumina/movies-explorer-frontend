@@ -4,7 +4,6 @@
 }
 
 .savedMovies {
-    max-width: 1280px;
     display: grid;
 }
 
@@ -53,10 +52,14 @@
 @media screen and (min-width: 768px) {
     .savedMovies {
         margin: 70px 70px 240px;
-        /*margin: 70px 70px 0;*/
-        /*padding: 0;*/
         grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
         gap: 38px 20px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .savedMovies {
+        grid-template-columns: repeat(auto-fit, min(270px));
     }
 }
 
@@ -72,8 +75,24 @@
     }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 767px) {
     .savedMovies {
-        grid-template-columns: repeat(auto-fit, min(270px));
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .savedMovies {
+        margin: 40px 10px 150px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 34px;
+    }
+
+    .savedMovies__name {
+        font-size: 12px;
+    }
+
+    .savedMovies__duration {
+        font-size: 10px;
     }
 }

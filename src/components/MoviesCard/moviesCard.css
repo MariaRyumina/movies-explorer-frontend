@@ -53,6 +53,12 @@
     }
 }
 
+@media screen and (min-width: 1280px) {
+    .movieCard {
+        grid-template-columns: repeat(auto-fit, min(270px));
+    }
+}
+
 @media screen and (max-width: 768px) {
     .movieCard {
         margin: 70px 0 0;
@@ -66,8 +72,25 @@
     }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 767px) {
     .movieCard {
-        grid-template-columns: repeat(auto-fit, min(270px));
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .movieCard {
+        margin: 40px 0 0;
+        padding: 0 10px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 34px;
+    }
+
+    .movie__name {
+        font-size: 12px;
+    }
+
+    .movie__duration {
+        font-size: 10px;
     }
 }

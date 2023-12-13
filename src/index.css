@@ -12,3 +12,8 @@
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
 }
+
+.content {
+    max-width: 1280px;
+    margin: 0 auto;
+}

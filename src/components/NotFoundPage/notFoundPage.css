@@ -23,10 +23,10 @@
 }
 
 .notFoundPage__back {
+    margin: 184px 0 0;
     border: none;
     background: transparent;
     cursor: pointer;
-    margin: 184px 0 0;
     color: #4285F4;
     font-size: 14px;
     font-weight: 400;
@@ -36,5 +36,25 @@
 @media screen and (max-width: 768px) {
     .notFoundPage {
         padding: 408px 0 232px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .notFoundPage {
+        padding: 329px 0 30px;
+    }
+
+    .notFoundPage__error {
+        font-size: 80px;
+    }
+
+    .notFoundPage__text {
+        margin: 10px 0 0;
+        font-size: 12px;
+    }
+
+    .notFoundPage__back {
+        margin: 284px 0 0;
+        font-size: 12px;
     }
 }

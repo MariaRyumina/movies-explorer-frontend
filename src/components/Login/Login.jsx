@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 export default function Login() {
     return (
         <section className="login">
-            <img src={logo} className="login__logo" />
+            <Link to='/' className="login__logo">
+                <img src={logo} alt="лого" />
+            </Link>
             <p className="login__title">Рады видеть!</p>
             <form className="login__form" noValidate>
                 <label className="login__label">

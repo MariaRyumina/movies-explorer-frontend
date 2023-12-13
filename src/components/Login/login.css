@@ -104,3 +104,37 @@
         align-items: center;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .login {
+        width: 260px;
+        padding: 56px 30px 30px;
+    }
+
+    .login__logo {
+        align-self: center;
+    }
+
+    .login__title {
+        align-self: center;
+        margin: 49px 0 0;
+    }
+
+    .login__form {
+        margin: 77px 0 0;
+    }
+
+    .login__button {
+        width: 260px;
+        margin-top: 309px;
+        font-size: 12px;
+    }
+
+    .login__subtitle {
+        font-size: 12px;
+    }
+
+    .login__subtitle-link {
+        font-size: 12px;
+    }
+}

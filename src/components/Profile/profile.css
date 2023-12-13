@@ -1,5 +1,5 @@
 .profile {
-    margin: 74px auto 0;
+    margin: 74px 0 0;
     padding-bottom: 70px;
     display: flex;
     flex-direction: column;
@@ -99,10 +99,38 @@
     }
 
     .profile__form {
-        margin: 88px 0 0;
+        margin-top: 88px;
     }
 
     .profile__label-email {
         margin-bottom: 209px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .profile {
+        margin: 70px auto 0;
+        padding: 0 30px 40px;
+    }
+
+    .profile__form {
+        margin-top: 72px;
+        width: 260px;
+    }
+
+    .profile__label {
+        margin-bottom: 17px;
+    }
+
+    .profile__label-email {
+        margin-bottom: 379px;
+    }
+
+    .profile__edit {
+        font-size: 12px;
+    }
+
+    .profile__signout {
+        font-size: 12px;
     }
 }
