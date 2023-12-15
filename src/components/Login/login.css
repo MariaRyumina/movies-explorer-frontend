@@ -56,6 +56,10 @@
     background: transparent;
 }
 
+.login__input:focus {
+    border-bottom: 1px solid #4285F4;;
+}
+
 .login__button {
     width: 396px;
     margin-top: 220px;

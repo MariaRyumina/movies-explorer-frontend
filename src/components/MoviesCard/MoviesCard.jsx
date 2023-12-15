@@ -20,6 +20,17 @@ import movie16 from '../../images/movie16.png';
 import React from "react";
 
 export default function MoviesCard() {
+    const [width, setWidth] = React.useState(window.innerWidth);
+
+    React.useEffect(() => {
+        const handleResize = (event) => setWidth(event.target.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    })
 
     return (
         <section className="movieCard">
@@ -54,8 +65,7 @@ export default function MoviesCard() {
                 <div className="movie__duration">1ч 42м</div>
             </div>
 
-            { (window.matchMedia("(min-width: 321px)").matches)
-                &&
+            { width > 480 &&
                 <>
                     <div className="movieCard__container">
                         <img src={movie06} alt="" className="movie__img" />
@@ -76,8 +86,7 @@ export default function MoviesCard() {
                         <div className="movie__duration">1ч 42м</div>
                     </div>
 
-                    { (window.matchMedia("(min-width: 769px)").matches)
-                        &&
+                    { width > 768 &&
                         <>
                             <div className="movieCard__container">
                                 <img src={movie09} alt="" className="movie__img" />

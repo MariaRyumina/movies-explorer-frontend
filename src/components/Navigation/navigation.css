@@ -1,9 +1,20 @@
-.navigation__auth {
+.navigation {
     padding-right: 70px;
+    width: 100%;
+}
+
+.navigation__auth {
     display: flex;
     flex-direction: row;
-    width: 100%;
     justify-content: space-between;
+    z-index: 10;
+}
+
+.navigation__auth_active {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 10;
 }
 
 .navigation__links-movies {
@@ -45,6 +56,26 @@
     margin-right: 3px;
 }
 
+.navigation__menu {
+    display: none;
+    background: url("../../images/icon_menu.svg");
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.navigation__menu_active {
+    display: none;
+    background: url("../../images/icon_close_menu.svg");
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
 .navigation__unauth {
     padding-right: 70px;
     display: flex;
@@ -71,13 +102,63 @@
     line-height: 16px; /* 133.333% */
 }
 
-@media screen and (max-width: 768px){
-    .navigation__auth {
+@media screen and (max-width: 768px) {
+    .navigation__unauth {
         padding-right: 0;
     }
 
-    .navigation__unauth {
-        padding-right: 0;
+    .navigation__auth {
+        padding: 165px 0 90px;
+        position: fixed;
+        right: -1000px;
+        top: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 621px;
+        width: 520px;
+        background-color: #202020;
+        transition: right .6s;
+    }
+
+    .navigation__auth_active {
+        padding: 165px 0 90px;
+        position: fixed;
+        right: 0;
+        top: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 621px;
+        width: 520px;
+        background-color: #202020;
+        transition: right .6s;
+    }
+
+    .navigation__links-movies {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .navigation__link-movies {
+        font-size: 18px;
+        line-height: normal;
+    }
+
+    .navigation__menu {
+        display: block;
+        position: absolute;
+        right: 30px;
+        top: 16px;
+        z-index: 11;
+        transition: background .3s;
+    }
+
+    .navigation__menu_active {
+        display: block;
+        position: absolute;
+        right: 22px;
+        top: 22px;
+        z-index: 11;
+        transition: background .3s;
     }
 }
 
