@@ -28,6 +28,16 @@
     flex-direction: column;
 }
 
+.register__input-error {
+    margin: 0;
+    padding-top: 6px;
+    color: #EE3465;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .register__label {
     margin-bottom: 19px;
 }
@@ -80,6 +90,12 @@
     opacity: .8;
 }
 
+.register__button:disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+    cursor: auto;
+}
+
 .register__subtitle {
     margin: 16px 0 0;
     color: #8b8b8b;
@@ -97,6 +113,10 @@
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+}
+
+.register__subtitle-link:hover {
+    opacity: .7;
 }
 
 @media screen and (max-width: 768px) {

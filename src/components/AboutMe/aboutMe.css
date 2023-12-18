@@ -55,6 +55,10 @@
     line-height: normal;
 }
 
+.aboutMe__github-link:hover {
+    opacity: .7;
+}
+
 .aboutMe__avatar {
     width: 270px;
     height: 327px;

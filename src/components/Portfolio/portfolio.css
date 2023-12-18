@@ -26,6 +26,10 @@
     align-items: center;
 }
 
+.portfolio__link:hover {
+    opacity: .7;
+}
+
 .portfolio__link:last-of-type {
     border-bottom: none;
 }

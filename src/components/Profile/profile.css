@@ -79,6 +79,10 @@
     line-height: normal;
 }
 
+.profile__edit:hover {
+    opacity: .7;
+}
+
 .profile__signout {
     cursor: pointer;
     background: transparent;
@@ -90,6 +94,10 @@
     font-size: 13px;
     font-weight: 500;
     line-height: normal;
+}
+
+.profile__signout:hover {
+    opacity: .7;
 }
 
 @media screen and (max-width: 768px) {

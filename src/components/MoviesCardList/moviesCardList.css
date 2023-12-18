@@ -19,6 +19,10 @@
     cursor: pointer;
 }
 
+.moviesCardList__more:hover {
+    opacity: .7;
+}
+
 @media screen and (max-width: 480px) {
     .moviesCardList__more {
         margin: 59px auto 80px;

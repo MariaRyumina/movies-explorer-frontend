@@ -56,6 +56,10 @@
     line-height: 18px; /* 163.636% */
 }
 
+.search__btn:hover {
+    opacity: .8;
+}
+
 @media screen and (max-width: 768px) {
     .search {
         margin: 80px 30px 10px;
