@@ -1,0 +1,164 @@
+.register {
+    width: 396px;
+    margin: 0 auto;
+    padding: 70px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register__logo {
+    align-self: start;
+    width: 38px;
+    height: 38px;
+}
+
+.register__title {
+    align-self: start;
+    margin: 40px 0 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.register__form {
+    margin: 35px 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.register__input-error {
+    margin: 0;
+    padding-top: 6px;
+    color: #EE3465;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.register__label {
+    margin-bottom: 19px;
+}
+
+.register__label:last-of-type {
+    margin-bottom: 0;
+}
+
+.register__input-title {
+    color: #8b8b8b;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.register__input {
+    padding: 4px 0 9px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #424242;
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: normal;
+    background: transparent;
+    color: #fff;
+}
+
+.register__input:focus {
+    border-bottom: 1px solid #4285F4;;
+}
+
+.register__button {
+    width: 396px;
+    margin-top: 152px;
+    padding: 14px 0;
+    background-color: #4285F4;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0);
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.register__button:hover {
+    opacity: .8;
+}
+
+.register__button:disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+    cursor: auto;
+}
+
+.register__subtitle {
+    margin: 16px 0 0;
+    color: #8b8b8b;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.register__subtitle-link {
+    margin-left: 6px;
+    text-decoration: none;
+    color: #4285f4;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.register__subtitle-link:hover {
+    opacity: .7;
+}
+
+@media screen and (max-width: 768px) {
+    .register {
+        margin: 0 auto;
+        padding: 232px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .register {
+        width: 260px;
+        padding: 56px 30px 30px;
+    }
+
+    .register__logo {
+        align-self: center;
+    }
+
+    .register__title {
+        align-self: center;
+        margin: 49px 0 0;
+    }
+
+    .register__form {
+        margin: 77px 0 0;
+    }
+
+    .register__button {
+        width: 260px;
+        margin-top: 240px;
+        font-size: 12px;
+    }
+
+    .register__subtitle {
+        font-size: 12px;
+    }
+
+    .register__subtitle-link {
+        font-size: 12px;
+    }
+}

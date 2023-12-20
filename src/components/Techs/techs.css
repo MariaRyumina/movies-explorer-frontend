@@ -1,0 +1,120 @@
+.techs {
+    background-color: #272727;
+    padding: 100px 70px;
+    color: #fff;
+}
+
+.techs__title {
+    margin: 0;
+    padding: 0 0 22px;
+    border-bottom: solid 1px #dadada;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.techs__subtitle {
+    margin: 89px 0 0;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 58px; /* 116% */
+    letter-spacing: -2px;
+}
+
+.techs__paragraph {
+    margin: 26px auto 0;
+    max-width: 460px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.56px;
+}
+
+.techs__list {
+    margin: 100px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.techs__list_item {
+    display: flex;
+    width: 100%;
+    max-width: 90px;
+    min-height: 60px;
+    justify-content: center;
+    align-items: center;
+    background-color: #303030;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
+}
+
+@media screen and (max-width: 768px) {
+    .techs {
+        padding: 90px 50px;
+    }
+
+    .techs__subtitle {
+        margin: 80px 0 0;
+    }
+
+    .techs__paragraph {
+        margin-top: 22px;
+        font-size: 12px;
+        line-height: 18px; /* 150% */
+        letter-spacing: -0.48px;
+    }
+
+    .techs__list {
+        margin-top: 83px;
+    }
+
+    .techs__list_item {
+        max-width: 84px;
+        min-height: 57px;
+        font-size: 12px;
+        letter-spacing: -0.48px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .techs {
+        padding: 70px 18px;
+    }
+
+    .techs__title {
+        padding: 0 0 28px;
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .techs__subtitle {
+        margin: 60px 0 0;
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+    }
+
+    .techs__paragraph {
+        margin: 24px 0 0;
+        font-size: 11px;
+        line-height: 16px; /* 145.455% */
+        letter-spacing: -0.44px;
+    }
+
+    .techs__list {
+        flex-wrap: wrap;
+        justify-content: start;
+        margin: 50px auto 0;
+        padding: 0 53px 0;
+    }
+}

@@ -1,0 +1,235 @@
+.navigation {
+    padding-right: 70px;
+    width: 100%;
+}
+
+.navigation__auth {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navigation__auth_active {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.navigation__links-movies {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.navigation__link-movies {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px; /* 138.462% */
+    text-decoration: none;
+    margin: 0;
+}
+
+.navigation__link-movies:hover {
+    opacity: .7;
+}
+
+.navigation__link-movies_active {
+    border-bottom: solid 1px #fff;
+}
+
+.navigation__links-profile {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navigation__links-profile:hover {
+    opacity: .7;
+}
+
+.navigation__link-profile {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px; /* 138.462% */
+    text-decoration: none;
+    margin: 0;
+}
+
+.navigation__link-profile_active {
+    border-bottom: solid 1px #fff;
+}
+
+.navigation__logo-profile {
+    display: inline-block;
+    background: rgba(255, 255, 255, .1);
+    border-radius: 50px;
+    padding: 7px;
+    margin-right: 3px;
+}
+
+.navigation__menu {
+    display: none;
+    background: url("../../images/icon_menu.svg");
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.navigation__menu_active {
+    display: none;
+    background: url("../../images/icon_close_menu.svg");
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.navigation__background {
+    display: none;
+    background: rgba(0, 0, 0, .4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.navigation__unauth {
+    padding-right: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+.navigation__signup {
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px; /* 133.333% */
+}
+
+.navigation__signin {
+    padding: 8px 20px;
+    text-decoration: none;
+    background-color: #3DDC84;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px; /* 133.333% */
+}
+
+@media screen and (max-width: 768px) {
+    .navigation__unauth {
+        padding-right: 0;
+    }
+
+    .navigation__auth {
+        position: fixed;
+        right: -1000px;
+        top: 0;
+        flex-direction: column;
+        align-items: center;
+        width: 520px;
+        height: 100vh;
+        background-color: #202020;
+        transition: right .6s;
+    }
+
+    .navigation__auth_active {
+        position: fixed;
+        right: 0;
+        top: 0;
+        flex-direction: column;
+        align-items: center;
+        width: 520px;
+        height: 100vh;
+        background-color: #202020;
+        transition: right .6s;
+    }
+
+    .navigation__background {
+        display: block;
+    }
+
+    .navigation__links-profile {
+        padding: 0 0 94px;
+    }
+
+    .navigation__links-movies {
+        padding: 160px 0 0;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .navigation__link-movies {
+        padding-bottom: 4px;
+        font-size: 18px;
+        line-height: normal;
+    }
+
+    .navigation__menu {
+        display: block;
+        position: absolute;
+        right: 30px;
+        top: 16px;
+        z-index: 11;
+        transition: background .3s;
+    }
+
+    .navigation__menu_active {
+        display: block;
+        position: fixed;
+        right: 22px;
+        top: 22px;
+        z-index: 11;
+        transition: background .3s;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .navigation__auth_active {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navigation__menu_active {
+        right: 13px;
+        top: 13px;
+    }
+
+    .navigation__links-movies {
+        padding-top: 144px;
+        gap: 17px;
+    }
+
+    .navigation__link-movies {
+        padding-bottom: 7px;
+    }
+
+    .navigation__links-profile {
+        padding-bottom: 50px;
+    }
+
+    .navigation__unauth {
+        gap: 14px;
+    }
+
+    .navigation__signup {
+        font-size: 10px;
+    }
+
+    .navigation__signin {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+}
