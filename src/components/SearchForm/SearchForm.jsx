@@ -8,7 +8,7 @@ export default function SearchForm() {
             <div className="search__container">
                 <div className="search__form">
                     <img src={iconSearch} alt="иконка поиска" className="search__icon" />
-                    <input id="movie" name="movie" type="text" placeholder="Фильм" className="search__input" />
+                    <input id="movie" name="movie" type="text" placeholder="Поиск фильма" className="search__input" />
                     <button className="search__btn">Найти</button>
                 </div>
                 <FilterCheckbox />

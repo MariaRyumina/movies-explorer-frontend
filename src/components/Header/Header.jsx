@@ -10,7 +10,7 @@ export default function Header() {
 
     return (
         <header className={ location.pathname === '/' ? "header header_blue" : "header" }>
-            <Link to='/' className="logo__header">
+            <Link to='/' className="header__logo">
                 <img src={logoImg} alt="лого" />
             </Link>
             <Navigation />

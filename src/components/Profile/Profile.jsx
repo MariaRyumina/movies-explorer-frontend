@@ -9,7 +9,7 @@ export default function Profile() {
                 <label className="profile__label profile__label-name">
                     <div className="profile__input-name">
                         <span className="profile__input-title">Имя</span>
-                        <input id="register-name" type="text" name="name" placeholder="Виталий" disabled
+                        <input id="register-name" type="text" name="name" placeholder="Введите имя" disabled
                                required className="profile__input profile__input_value_name" />
                     </div>
                     <span id="email-error" className="profile__input-error" />
@@ -17,7 +17,7 @@ export default function Profile() {
                 <label className="profile__label profile__label-email">
                     <div className="profile__input-email">
                         <span className="profile__input-title">E-mail</span>
-                        <input id="register-email" type="email" name="email" placeholder="pochta@yandex.ru" disabled
+                        <input id="register-email" type="email" name="email" placeholder="Введите почту" disabled
                                required className="profile__input profile__input_value_email" />
                     </div>
                     <span id="email-error" className="profile__input-error" />

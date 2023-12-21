@@ -27,6 +27,11 @@
 .savedMovies__delete {
     grid-area: delete;
     align-self: start;
+    cursor: pointer;
+}
+
+.savedMovies__delete:hover {
+    opacity: .8;
 }
 
 .savedMovies__name {

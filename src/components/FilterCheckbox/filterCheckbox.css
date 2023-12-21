@@ -5,6 +5,7 @@
 
 .checkbox {
     display: inline-block;
+    cursor: pointer;
 }
 
 .checkbox__input {

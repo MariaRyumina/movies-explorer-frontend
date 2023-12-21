@@ -70,6 +70,7 @@ export default function Login() {
                         id="login-email"
                         type="email"
                         name="email"
+                        placeholder="Введите email"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => emailHandler(e)}
@@ -86,6 +87,7 @@ export default function Login() {
                         id="login-password"
                         type="password"
                         name="password"
+                        placeholder="Введите пароль"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => passwordHandler(e)}

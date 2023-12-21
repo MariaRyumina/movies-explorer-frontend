@@ -23,8 +23,8 @@ export default function Navigation() {
         <>
             {loggedIn ? (
                 <nav className="navigation">
-                    <button onClick={() => setNav(!nav)} className={nav ? "navigation__menu_active" : "navigation__menu"} />
-                    <nav className={nav ? "navigation__auth_active" : "navigation__auth"}>
+                    <button onClick={() => setNav(!nav)} className={nav ? "navigation__menu navigation__menu_active" : "navigation__menu"} />
+                    <nav className={nav ? "navigation__auth navigation__auth_active" : "navigation__auth"}>
                         <div className="navigation__links-movies">
                             { width < 769 &&
                                 <Link

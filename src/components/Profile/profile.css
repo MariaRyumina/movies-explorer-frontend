@@ -63,6 +63,7 @@
     line-height: normal;
 }
 
+/*цвет плейсхолдера*/
 .profile__input::-webkit-input-placeholder {
     color: #fff;
 }

@@ -88,6 +88,7 @@ export default function Register() {
                         id="register-name"
                         type="text"
                         name="name"
+                        placeholder="Введите имя"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => nameHandler(e)}
@@ -104,6 +105,7 @@ export default function Register() {
                         id="register-email"
                         type="email"
                         name="email"
+                        placeholder="Введите email"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => emailHandler(e)}
@@ -120,6 +122,7 @@ export default function Register() {
                         id="register-password"
                         type="password"
                         name="password"
+                        placeholder="Введите пароль"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => passwordHandler(e)}
