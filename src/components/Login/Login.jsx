@@ -8,8 +8,8 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [emailDirty, setEmailDirty] = useState(false);
     const [passwordDirty, setPasswordDirty] = useState(false);
-    const [emailError, setEmailError] = useState('Поле "E-mail" должно быть заполнено!');
-    const [passwordError, setPasswordError] = useState('Поле "Пароль" должно быть заполнено!');
+    const [emailError, setEmailError] = useState('Обязательное поле');
+    const [passwordError, setPasswordError] = useState('Обязательное поле');
     const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
@@ -24,9 +24,9 @@ export default function Login() {
         setEmail(e.target.value);
         const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!reg.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Поле "E-mail" имеет неправильный формат');
+            setEmailError('Введите корректный e-mail адрес');
             if (!e.target.value) {
-                setEmailError('Поле "E-mail" должно быть заполнено!');
+                setEmailError('Обязательное поле');
             }
         } else {
             setEmailError('')
@@ -38,7 +38,7 @@ export default function Login() {
         if (e.target.value.length < 4) {
             setPasswordError('Пароль должен быть длиннее 4 символов');
             if (!e.target.value) {
-                setPasswordError('Поле "Пароль" должно быть заполнено!');
+                setPasswordError('Обязательное поле');
             }
         } else {
             setPasswordError('')
