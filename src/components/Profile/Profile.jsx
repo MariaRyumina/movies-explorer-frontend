@@ -2,6 +2,9 @@ import React from "react";
 import './profile.css';
 
 export default function Profile() {
+    function handle () {
+    }
+
     return (
         <section className="profile">
             <p className="profile__title">Привет, Виталий!</p>
@@ -23,8 +26,11 @@ export default function Profile() {
                     <span id="email-error" className="profile__input-error" />
                 </label>
             </form>
-            <button type="submit" className="profile__edit">Редактировать</button>
+
+            <button type="submit" onClick={handle} className="profile__edit">Редактировать</button>
             <button type="submit" className="profile__signout">Выйти из аккаунта</button>
+
+            <button type="submit" className="profile__btn-save">Сохранить</button>
         </section>
     )
 }

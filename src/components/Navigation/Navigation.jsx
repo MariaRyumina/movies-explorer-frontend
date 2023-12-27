@@ -3,17 +3,14 @@ import './navigation.css';
 import { Link, useLocation } from 'react-router-dom';
 import profileLogoImg from '../../images/icon_user.svg';
 
-export default function Navigation() {
-    const [loggedIn, setLoggedIn] = React.useState(true); //вошёл пользователь в систему или нет
+export default function Navigation({ loggedIn }) {
     const [width, setWidth] = React.useState(window.innerWidth);
     const [nav, setNav] = React.useState(false);
     const location = useLocation();
 
     React.useEffect(() => {
         const handleResize = (evt) => setWidth(evt.target.innerWidth);
-
         window.addEventListener('resize', handleResize);
-
         return () => {
             window.removeEventListener('resize', handleResize);
         };

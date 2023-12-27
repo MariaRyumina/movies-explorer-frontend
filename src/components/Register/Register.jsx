@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './register.css';
-import logo from "../../images/logo.svg";
-import { Link } from "react-router-dom";
+import logo from '../../images/logo.svg';
+import { Link } from 'react-router-dom';
 
-export default function Register() {
+export default function Register({ onRegister }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,6 +15,11 @@ export default function Register() {
     const [passwordError, setPasswordError] = useState('Обязательное поле');
     const [formValid, setFormValid] = useState(false);
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        onRegister( name, email, password );
+    }
+
     useEffect(() => {
         if (nameError || emailError || passwordError) {
             setFormValid(false)
@@ -25,6 +30,7 @@ export default function Register() {
 
     const nameHandler = (e) => {
         setName(e.target.value);
+
         if (e.target.value.length < 2) {
             setNameError('Имя должно быть длиннее 2 символов');
             if (!e.target.value) {
@@ -37,7 +43,9 @@ export default function Register() {
 
     const emailHandler = (e) => {
         setEmail(e.target.value);
+
         const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
         if (!reg.test(String(e.target.value).toLowerCase())) {
             setEmailError('Введите корректный e-mail адрес');
             if (!e.target.value) {
@@ -50,6 +58,7 @@ export default function Register() {
 
     const passwordHandler = (e) => {
         setPassword(e.target.value);
+
         if (e.target.value.length < 4) {
             setPasswordError('Пароль должен быть длиннее 4 символов');
             if (!e.target.value) {
@@ -80,7 +89,7 @@ export default function Register() {
                 <img src={logo} alt="лого" />
             </Link>
             <p className="register__title">Добро пожаловать!</p>
-            <form className="register__form" noValidate>
+            <form onSubmit={handleSubmit} className="register__form" noValidate>
                 <label className="register__label">
                     <span className="register__input-title">Имя</span>
                     <input
@@ -89,9 +98,9 @@ export default function Register() {
                         type="text"
                         name="name"
                         placeholder="Введите имя"
-                        onBlur={e => blurHandle(e)}
+                        onBlur={blurHandle}
                         required
-                        onChange={e => nameHandler(e)}
+                        onChange={nameHandler}
                         className="register__input register__input_value_name"
                     />
                     {(nameDirty && nameError) &&
@@ -106,9 +115,9 @@ export default function Register() {
                         type="email"
                         name="email"
                         placeholder="Введите email"
-                        onBlur={e => blurHandle(e)}
+                        onBlur={blurHandle}
                         required
-                        onChange={e => emailHandler(e)}
+                        onChange={emailHandler}
                         className="register__input register__input_value_email"
                     />
                     {(emailDirty && emailError) &&
@@ -123,9 +132,9 @@ export default function Register() {
                         type="password"
                         name="password"
                         placeholder="Введите пароль"
-                        onBlur={e => blurHandle(e)}
+                        onBlur={blurHandle}
                         required
-                        onChange={e => passwordHandler(e)}
+                        onChange={passwordHandler}
                         className="register__input register__input_value_password"
                     />
                     {(passwordDirty && passwordError) &&
@@ -141,4 +150,3 @@ export default function Register() {
         </section>
     )
 }
-

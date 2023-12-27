@@ -101,6 +101,32 @@
     opacity: .7;
 }
 
+.profile__btn-save {
+    width: 410px;
+    margin-top: 220px;
+    padding: 14px 0;
+    background-color: #4285F4;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0);
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.profile__btn-save:hover {
+    opacity: .8;
+}
+
+.profile__btn-save:disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+    cursor: auto;
+}
+
 @media screen and (max-width: 768px) {
     .profile {
         margin: 236px auto 0;
