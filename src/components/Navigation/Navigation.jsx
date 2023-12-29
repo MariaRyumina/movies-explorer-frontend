@@ -18,7 +18,7 @@ export default function Navigation({ loggedIn }) {
 
     return (
         <>
-            {loggedIn ? (
+            { loggedIn ? (
                 <nav className="navigation">
                     <button onClick={() => setNav(!nav)} className={nav ? "navigation__menu navigation__menu_active" : "navigation__menu"} />
                     <nav className={nav ? "navigation__auth navigation__auth_active" : "navigation__auth"}>
@@ -71,7 +71,7 @@ export default function Navigation({ loggedIn }) {
                     <Link to="/signup" className="navigation__signup">Регистрация</Link>
                     <Link to="/signin" className="navigation__signin">Войти</Link>
                 </nav>
-            )}
+            ) }
         </>
     )
 }

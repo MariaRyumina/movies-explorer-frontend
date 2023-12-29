@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
@@ -17,17 +17,35 @@ import Preloader from "../Preloader/Preloader";
 
 function App() {
     const [currentUser, setCurrentUser] = React.useState({});
-    const [cards, setCards] = React.useState([]);
     const [loggedIn, setLoggedIn] = React.useState(false); //вошёл пользователь в систему или нет
     const location = useLocation();
     const navigate = useNavigate();
+    const [isPreloader, setIsPreloader] = useState(false);
+
+    //проверка токена на валидность
+    React.useEffect(() => {
+        const token = localStorage.getItem('jwt');
+
+        if(token) {
+            mainApi.checkToken(token)
+                .then(res => {
+                    if (res) {
+                        setLoggedIn(true);
+                    }
+                })
+                .catch(err => {
+                    localStorage.removeItem('jwt');
+                    console.log(`Ошибка запроса проверки токена: ${err}`);
+                })
+        }
+    }, [navigate])
 
     //регистрация
     function handleRegistration( name, email, password ) {
         mainApi.register( name, email, password )
             .then(res => {
                 if (res) {
-                    navigate('/signin');
+                    handleAuthorization( email, password ) //после удачной регистрации автоматически авторизуется
                 }
             })
             .catch(err => {
@@ -41,7 +59,7 @@ function App() {
             .then(res => {
                 if(res) {
                     setLoggedIn(true);
-                    navigate('/');
+                    navigate('/movies');
                 }
             })
             .catch(err => {
@@ -60,78 +78,90 @@ function App() {
         }
     }, [loggedIn])
 
+    function showPreloader() {
+        setIsPreloader(true);
+    }
+
+    function hidePreloader() {
+        setIsPreloader(false);
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="content">
-                    { ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname)
-                        && <Header
-                            loggedIn={loggedIn}
+                { ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname)
+                    && <Header
+                        loggedIn={loggedIn}
+                    />
+                }
+                <div className="main">
+                    <Routes>
+                        <Route
+                            path='/*'
+                            element={
+                                <NotFoundPage />
+                            }
                         />
-                    }
-                    <div className="main">
-                        <Routes>
-                            <Route
-                                path='/*'
-                                element={
-                                    <NotFoundPage />
-                                }
-                            />
-                            <Route
-                                path='/signup'
-                                element={
-                                    <Register
-                                        onRegister={handleRegistration}
-                                    />
-                                }
-                            />
-                            <Route
-                                path='/signin'
-                                element={
-                                    <Login
-                                        onLogin={handleAuthorization}
-                                        setLoggedIn={setLoggedIn}
-                                    />
-                                }
-                            />
-                            <Route
-                                path='/'
-                                element={
-                                    <Main />
-                                }
-                            />
-                            <Route
-                                path='/movies'
-                                element={ <ProtectedRoute
-                                    element={Movies}
-                                />}
-                            />
-                            <Route
-                                path='/saved-movies'
-                                element={
-                                    <ProtectedRoute
-                                        element={SavedMovies}
-                                    />
-                                }
-                            />
-                            <Route
-                                path='/profile'
-                                element={
-                                    <ProtectedRoute
-                                        element={Profile}
-                                        setLoggedIn={setLoggedIn}
-                                    />
-                                }
-                            />
-                        </Routes>
-                    </div>
-                    { (location.pathname === '/' ||
-                            location.pathname === '/movies' ||
-                            location.pathname === '/saved-movies')
-                        && <Footer />
-                    }
-
-                    <Preloader />
+                        <Route
+                            path='/signup'
+                            element={
+                                <Register
+                                    onRegister={handleRegistration}
+                                />
+                            }
+                        />
+                        <Route
+                            path='/signin'
+                            element={
+                                <Login
+                                    onLogin={handleAuthorization}
+                                />
+                            }
+                        />
+                        <Route
+                            path='/'
+                            element={
+                                <Main />
+                            }
+                        />
+                        <Route
+                            path='/movies'
+                            element={ <ProtectedRoute
+                                element={Movies}
+                                loggedIn={loggedIn}
+                            />}
+                        />
+                        <Route
+                            path='/saved-movies'
+                            element={
+                                <ProtectedRoute
+                                    element={SavedMovies}
+                                    loggedIn={loggedIn}
+                                />
+                            }
+                        />
+                        <Route
+                            path='/profile'
+                            element={
+                                <ProtectedRoute
+                                    element={Profile}
+                                    loggedIn={loggedIn}
+                                    setLoggedIn={setLoggedIn}
+                                />
+                            }
+                        />
+                    </Routes>
                 </div>
+                { (location.pathname === '/' ||
+                        location.pathname === '/movies' ||
+                        location.pathname === '/saved-movies')
+                    && <Footer />
+                }
+
+                <Preloader
+                    isOpen={isPreloader}
+                />
+            </div>
         </CurrentUserContext.Provider>
     )
 }

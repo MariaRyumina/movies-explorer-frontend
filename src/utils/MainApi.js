@@ -24,6 +24,7 @@ class MainApi {
     }
 
     login(email, password) {
+        console.log("login request send");
         return fetch (`${this._baseUrl}/signin`, {
             method: 'POST',
             headers: {
@@ -34,6 +35,7 @@ class MainApi {
         })
             .then(res => this._handleResponse(res))
             .then(data => {
+                console.log("get data", data.token);
                 if (data != null && data.token ) {
                     localStorage.setItem('jwt', data.token);
                     return true;
@@ -41,11 +43,26 @@ class MainApi {
             })
     }
 
+    //запрос для проверки валидности токена
+    checkToken(token) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                return this._handleResponse(res)
+            })
+    }
+
     //загрузка информации о пользователе с сервера
     getUserInfo() {
         const token = localStorage.getItem('jwt');
 
-        return fetch(`${this._baseUrl}/profile`, {
+        return fetch(`${this._baseUrl}/users/me`, {
             headers: {
                 authorization: `Bearer ${token}`,
             },
@@ -57,7 +74,7 @@ class MainApi {
     updateUserInfo({ name, email }) {
         const token = localStorage.getItem('jwt');
 
-        return fetch(`${this._baseUrl}/profile`, {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
                 authorization: `Bearer ${token}`,
@@ -72,7 +89,7 @@ class MainApi {
     changeLikeMoviesCardStatus(id, isLike) {
         const token = localStorage.getItem('jwt');
 
-        return fetch(`${this._baseUrl}/saved-movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: isLike ? 'PUT' : 'DELETE',
             headers: {
                 authorization: `Bearer ${token}`,
@@ -112,5 +129,6 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-    baseUrl: 'https://api.movies.ryumina.nomoredomainsmonster.ru',
+    baseUrl: 'http://localhost:3000',
+    // baseUrl: 'https://api.movies.ryumina.nomoredomainsmonster.ru',
 })
