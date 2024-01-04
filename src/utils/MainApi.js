@@ -24,7 +24,6 @@ class MainApi {
     }
 
     login(email, password) {
-        console.log("login request send");
         return fetch (`${this._baseUrl}/signin`, {
             method: 'POST',
             headers: {
@@ -35,7 +34,6 @@ class MainApi {
         })
             .then(res => this._handleResponse(res))
             .then(data => {
-                console.log("get data", data.token);
                 if (data != null && data.token ) {
                     localStorage.setItem('jwt', data.token);
                     return true;

@@ -78,6 +78,15 @@ function App() {
         }
     }, [loggedIn])
 
+    //загрузка информации о пользователе на сервер
+    function handleUpdateUser ({ name, email }) {
+        mainApi.updateUserInfo({ name, email })
+            .then(resultUser => {
+                setCurrentUser(resultUser)
+            })
+            .catch(err => console.log(`Ошибка отправки данных о пользователе на сервер: ${err}`))
+    }
+
     function showPreloader() {
         setIsPreloader(true);
     }
@@ -147,6 +156,7 @@ function App() {
                                     element={Profile}
                                     loggedIn={loggedIn}
                                     setLoggedIn={setLoggedIn}
+                                    onUpdateUser={handleUpdateUser}
                                 />
                             }
                         />
