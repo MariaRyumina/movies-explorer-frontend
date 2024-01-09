@@ -1,5 +1,5 @@
 class MoviesApi {
-    constructor({ baseURL }) {
+    constructor(baseURL) {
         this._baseUrl = baseURL;
     }
 
@@ -13,18 +13,13 @@ class MoviesApi {
 
     //загрузка фильмов с внешнего сервера на сайт
     getBeatFilmCardList() {
-        const token = localStorage.getItem('jwt');
-
         return fetch(this._baseUrl, {
             headers: {
-                authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         })
-            .then(res => this._handleResponse(res))
+            .then(res => this._handleResponse(res));
     }
 }
 
-export const moviesApi = new MoviesApi({
-    baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
-});
+export const moviesApi = new MoviesApi('https://api.nomoreparties.co/beatfilm-movies');

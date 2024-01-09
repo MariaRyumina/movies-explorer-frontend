@@ -21,6 +21,8 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const [isPreloader, setIsPreloader] = useState(false);
+    const [loginError, setLoginError] = useState('');
+    const [movies, setMovies] = useState([]);
 
     //проверка токена на валидность
     React.useEffect(() => {
@@ -38,7 +40,7 @@ function App() {
                     console.log(`Ошибка запроса проверки токена: ${err}`);
                 })
         }
-    }, [navigate])
+    })
 
     //регистрация
     function handleRegistration( name, email, password ) {
@@ -58,11 +60,13 @@ function App() {
         mainApi.login( email, password )
             .then(res => {
                 if(res) {
+                    setLoginError('');
                     setLoggedIn(true);
                     navigate('/movies');
                 }
             })
             .catch(err => {
+                setLoginError('Вы ввели неправильные имя или пароль');
                 console.error(`Ошибка авторизации: ${err}`);
             })
     }
@@ -85,6 +89,16 @@ function App() {
                 setCurrentUser(resultUser)
             })
             .catch(err => console.log(`Ошибка отправки данных о пользователе на сервер: ${err}`))
+    }
+
+    //загрузка фильмов со стороннего сервера
+    function getBeatFilms () {
+        moviesApi.getBeatFilmCardList()
+            .then(resultMovies => {
+                setMovies(resultMovies)
+                console.log(resultMovies)
+            })
+            .catch(err => console.log(`Ошибка загрузки фильмов с сервера: ${err}`))
     }
 
     function showPreloader() {
@@ -124,6 +138,7 @@ function App() {
                             element={
                                 <Login
                                     onLogin={handleAuthorization}
+                                    loginError={loginError}
                                 />
                             }
                         />
@@ -135,10 +150,14 @@ function App() {
                         />
                         <Route
                             path='/movies'
-                            element={ <ProtectedRoute
-                                element={Movies}
-                                loggedIn={loggedIn}
-                            />}
+                            element={
+                                <ProtectedRoute
+                                    element={Movies}
+                                    loggedIn={loggedIn}
+                                    movies={movies}
+                                    getFilms={getBeatFilms}
+                                />
+                            }
                         />
                         <Route
                             path='/saved-movies'

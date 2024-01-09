@@ -33,7 +33,7 @@ class MainApi {
             body: JSON.stringify({ email, password }),
         })
             .then(res => this._handleResponse(res))
-            .then(data => {
+            .then((data) => {
                 if (data != null && data.token ) {
                     localStorage.setItem('jwt', data.token);
                     return true;

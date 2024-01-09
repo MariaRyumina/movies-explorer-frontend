@@ -1,6 +1,6 @@
 import React from 'react';
 import './navigation.css';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import profileLogoImg from '../../images/icon_user.svg';
 
 export default function Navigation({ loggedIn }) {
@@ -24,30 +24,30 @@ export default function Navigation({ loggedIn }) {
                     <nav className={nav ? "navigation__auth navigation__auth_active" : "navigation__auth"}>
                         <div className="navigation__links-movies">
                             { width < 769 &&
-                                <Link
+                                <NavLink
                                     to="/"
                                     onClick={() => setNav(!nav)}
                                     className={ location.pathname === '/' ? "navigation__link-movies navigation__link-movies_active" : "navigation__link-movies" }
                                 >
                                     Главная
-                                </Link>
+                                </NavLink>
                             }
-                            <Link
+                            <NavLink
                                 to="/movies"
                                 onClick={() => setNav(!nav)}
                                 className={ location.pathname === '/movies' ? "navigation__link-movies navigation__link-movies_active" : "navigation__link-movies" }
                             >
                                 Фильмы
-                            </Link>
-                            <Link
+                            </NavLink>
+                            <NavLink
                                 to="/saved-movies"
                                 onClick={() => setNav(!nav)}
                                 className={ location.pathname === '/saved-movies' ? "navigation__link-movies navigation__link-movies_active" : "navigation__link-movies" }
                             >
                                 Сохранённые фильмы
-                            </Link>
+                            </NavLink>
                         </div>
-                        <Link
+                        <NavLink
                             to="/profile"
                             onClick={() => setNav(!nav)}
                             className="navigation__links-profile"
@@ -62,7 +62,7 @@ export default function Navigation({ loggedIn }) {
                                 alt="лого аккаунта"
                                 className="navigation__logo-profile"
                             />
-                        </Link>
+                        </NavLink>
                     </nav>
                     <div className={nav ? "navigation__background" : ""} />
                 </nav>
