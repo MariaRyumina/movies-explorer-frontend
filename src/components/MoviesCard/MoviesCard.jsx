@@ -17,12 +17,18 @@ import movie13 from '../../images/movie13.png';
 import movie14 from '../../images/movie14.png';
 import movie15 from '../../images/movie15.png';
 import movie16 from '../../images/movie16.png';
-import React from "react";
+import React, {useState} from "react";
 import {useLocation} from "react-router-dom";
 import deleteIcon from "../../images/icon_delete_movie.png";
 
 export default function MoviesCard({ movie }) {
     const location = useLocation();
+
+    function getTimeFromMin (min) {
+        let hours = Math.trunc(min/60);
+        let minutes = min % 60;
+        return hours + 'ч ' + minutes + 'м';
+    }
 
     return (
         <section className="movieCard">
@@ -30,13 +36,12 @@ export default function MoviesCard({ movie }) {
                 <img src={`https://api.nomoreparties.co/${movie.image.url}`} alt={movie.nameRU} className="movieCard__img" />
             </a>
             <h3 className="movieCard__name">{movie.nameRU}</h3>
-            { location.pathname === '/saved-movies' ?
-                (
+            { location.pathname === '/saved-movies' ? (
                     <img src={deleteIcon} alt="like movie" className="movieCard__delete" />
                 ) : (
                     <img src={likeIcon} alt="like movie" className="movieCard__like movieCard__like_active" />
                 ) }
-            <div className="movieCard__duration">{movie.duration}</div>
+            <div className="movieCard__duration">{ getTimeFromMin(movie.duration) }</div>
         </section>
     )
 }

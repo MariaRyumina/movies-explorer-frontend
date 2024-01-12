@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -13,7 +13,10 @@ import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import Preloader from "../Preloader/Preloader";
+import Preloader from '../Preloader/Preloader';
+import PopupInfo from '../PopupInfo/PopupInfo';
+import authYes from '../../images/auth_yes.png';
+import authNo from '../../images/auth_no.png';
 
 function App() {
     const [currentUser, setCurrentUser] = React.useState({});
@@ -21,8 +24,9 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const [isPreloader, setIsPreloader] = useState(false);
-    const [loginError, setLoginError] = useState('');
     const [movies, setMovies] = useState([]);
+    const [isOpenPopup, setIsOpenPopup] = useState(false);
+    const [infoPopup, setInfoPopup] = useState({ img: null, title: null });
 
     //проверка токена на валидность
     React.useEffect(() => {
@@ -40,17 +44,21 @@ function App() {
                     console.log(`Ошибка запроса проверки токена: ${err}`);
                 })
         }
-    })
+    }, [loggedIn])
 
     //регистрация
     function handleRegistration( name, email, password ) {
         mainApi.register( name, email, password )
             .then(res => {
                 if (res) {
+                    handleInfoPopup(authYes, 'Вы успешно зарегистрированы');
+                    handleOpenPopup();
                     handleAuthorization( email, password ) //после удачной регистрации автоматически авторизуется
                 }
             })
             .catch(err => {
+                handleInfoPopup(authNo, 'Что-то пошло не так! Попробуйте ещё раз.');
+                handleOpenPopup();
                 console.error(`Ошибка регистрации: ${err}`);
             })
     }
@@ -60,13 +68,13 @@ function App() {
         mainApi.login( email, password )
             .then(res => {
                 if(res) {
-                    setLoginError('');
                     setLoggedIn(true);
                     navigate('/movies');
                 }
             })
             .catch(err => {
-                setLoginError('Вы ввели неправильные имя или пароль');
+                handleInfoPopup(authNo, 'Вы ввели неправильные имя или пароль');
+                handleOpenPopup();
                 console.error(`Ошибка авторизации: ${err}`);
             })
     }
@@ -96,17 +104,29 @@ function App() {
         moviesApi.getBeatFilmCardList()
             .then(resultMovies => {
                 setMovies(resultMovies)
-                console.log(resultMovies)
             })
             .catch(err => console.log(`Ошибка загрузки фильмов с сервера: ${err}`))
     }
 
-    function showPreloader() {
+    function showPreloader () {
         setIsPreloader(true);
     }
 
-    function hidePreloader() {
+    function hidePreloader () {
         setIsPreloader(false);
+    }
+
+    //изменение картинки и сообщения в попапе InfoPopup
+    function handleInfoPopup(img, title){
+        setInfoPopup({ img, title })
+    }
+
+    function handleOpenPopup () {
+        setIsOpenPopup(true)
+    }
+
+    function closePopup () {
+        setIsOpenPopup(false)
     }
 
     return (
@@ -125,23 +145,43 @@ function App() {
                                 <NotFoundPage />
                             }
                         />
-                        <Route
-                            path='/signup'
-                            element={
-                                <Register
-                                    onRegister={handleRegistration}
+                        { !loggedIn ? (
+                            <Route
+                                path='/signup'
+                                element={
+                                    <Register
+                                        onRegister={handleRegistration}
+                                    />
+                                }
+                            />
+                            ) : (
+                                <Route
+                                    path='/signup'
+                                    element={
+                                        <Navigate to='/' />
+                                    }
                                 />
-                            }
-                        />
-                        <Route
-                            path='/signin'
-                            element={
-                                <Login
-                                    onLogin={handleAuthorization}
-                                    loginError={loginError}
+                            )
+                        }
+                        { !loggedIn ? (
+                            <Route
+                                path='/signin'
+                                element={
+                                    <Login
+                                        onLogin={handleAuthorization}
+                                    />
+                                }
+                            />
+                            ) : (
+                                <Route
+                                    path='/signin'
+                                    element={
+                                        <Navigate to='/' />
+                                    }
                                 />
-                            }
-                        />
+                            )
+                        }
+
                         <Route
                             path='/'
                             element={
@@ -152,10 +192,12 @@ function App() {
                             path='/movies'
                             element={
                                 <ProtectedRoute
-                                    element={Movies}
                                     loggedIn={loggedIn}
+                                    element={Movies}
                                     movies={movies}
-                                    getFilms={getBeatFilms}
+                                    getBeatFilms={getBeatFilms}
+                                    infoPopup={handleInfoPopup}
+                                    openPopup={handleOpenPopup}
                                 />
                             }
                         />
@@ -163,8 +205,10 @@ function App() {
                             path='/saved-movies'
                             element={
                                 <ProtectedRoute
-                                    element={SavedMovies}
                                     loggedIn={loggedIn}
+                                    element={SavedMovies}
+                                    infoPopup={handleInfoPopup}
+                                    openPopup={handleOpenPopup}
                                 />
                             }
                         />
@@ -172,8 +216,8 @@ function App() {
                             path='/profile'
                             element={
                                 <ProtectedRoute
-                                    element={Profile}
                                     loggedIn={loggedIn}
+                                    element={Profile}
                                     setLoggedIn={setLoggedIn}
                                     onUpdateUser={handleUpdateUser}
                                 />
@@ -181,6 +225,7 @@ function App() {
                         />
                     </Routes>
                 </div>
+
                 { (location.pathname === '/' ||
                         location.pathname === '/movies' ||
                         location.pathname === '/saved-movies')
@@ -189,6 +234,13 @@ function App() {
 
                 <Preloader
                     isOpen={isPreloader}
+                />
+
+                <PopupInfo
+                    isOpen={isOpenPopup}
+                    onClose={closePopup}
+                    img={infoPopup.img}
+                    title={infoPopup.title}
                 />
             </div>
         </CurrentUserContext.Provider>

@@ -3,7 +3,7 @@ import './login.css';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 
-export default function Login({ onLogin, loginError }) {
+export default function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailDirty, setEmailDirty] = useState(false);
@@ -106,7 +106,6 @@ export default function Login({ onLogin, loginError }) {
                     }
                 </label>
 
-                <p className="login__error">{loginError}</p>
                 <button disabled={!formValid} type="submit" className="login__button">Войти</button>
                 <p className="login__subtitle">Ещё не зарегистрированы?
                     <Link to='/signup' className="login__subtitle-link">Регистрация</Link>

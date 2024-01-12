@@ -5,7 +5,6 @@
 
 .moviesCardList__movies {
     display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(151px, 1fr));
 }
 
 .moviesCardList__more {

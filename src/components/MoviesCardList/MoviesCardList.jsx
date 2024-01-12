@@ -6,6 +6,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 export default function MoviesCardList({ movies }) {
     const location = useLocation();
 
+
     return (
         <section className="moviesCardList">
             <div className="moviesCardList__movies">
@@ -17,7 +18,7 @@ export default function MoviesCardList({ movies }) {
                 ))}
             </div>
 
-            {location.pathname === '/movies' && <button className="moviesCardList__more">Ещё</button>}
+            { location.pathname === '/movies' && <button className="moviesCardList__more">Ещё</button> }
         </section>
     )
 }

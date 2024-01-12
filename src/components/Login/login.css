@@ -37,15 +37,6 @@
     line-height: normal;
 }
 
-.login__error {
-    margin: 214px auto 0;
-    padding-bottom: 6px;
-    color: #EE3465;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: normal;
-}
-
 .login__label {
     margin-bottom: 19px;
 }
@@ -80,6 +71,7 @@
 
 .login__button {
     width: 396px;
+    margin-top: 220px;
     padding: 14px 0;
     background-color: #4285F4;
     border-radius: 3px;
