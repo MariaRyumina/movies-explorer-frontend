@@ -15,18 +15,23 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
 import PopupInfo from '../PopupInfo/PopupInfo';
-import authYes from '../../images/auth_yes.png';
-import authNo from '../../images/auth_no.png';
+import iconOK from '../../images/icon_ok.png';
+import iconError from '../../images/icon_error.png';
 
 function App() {
     const [currentUser, setCurrentUser] = React.useState({});
-    const [loggedIn, setLoggedIn] = React.useState(false); //вошёл пользователь в систему или нет
     const location = useLocation();
     const navigate = useNavigate();
     const [isPreloader, setIsPreloader] = useState(false);
-    const [movies, setMovies] = useState([]);
     const [isOpenPopup, setIsOpenPopup] = useState(false);
     const [infoPopup, setInfoPopup] = useState({ img: null, title: null });
+    const [movies, setMovies] = useState([]);
+    const [savedMovies, setSavedMovies] = useState([]);
+    // const [loggedIn, setLoggedIn] = React.useState(false);
+
+    const [loggedIn, setLoggedIn] = React.useState(() => {
+        return !!localStorage.getItem("jwt");
+    }); //вошёл пользователь в систему или нет
 
     //проверка токена на валидность
     React.useEffect(() => {
@@ -41,23 +46,23 @@ function App() {
                 })
                 .catch(err => {
                     localStorage.removeItem('jwt');
-                    console.log(`Ошибка запроса проверки токена: ${err}`);
+                    console.error(`Ошибка запроса проверки токена: ${err}`);
                 })
         }
-    }, [loggedIn])
+    }, [setLoggedIn])
 
     //регистрация
     function handleRegistration( name, email, password ) {
         mainApi.register( name, email, password )
             .then(res => {
                 if (res) {
-                    handleInfoPopup(authYes, 'Вы успешно зарегистрированы');
+                    handleInfoPopup(iconOK, 'Вы успешно зарегистрированы');
                     handleOpenPopup();
                     handleAuthorization( email, password ) //после удачной регистрации автоматически авторизуется
                 }
             })
             .catch(err => {
-                handleInfoPopup(authNo, 'Что-то пошло не так! Попробуйте ещё раз.');
+                handleInfoPopup(iconError, 'Что-то пошло не так! Попробуйте ещё раз.');
                 handleOpenPopup();
                 console.error(`Ошибка регистрации: ${err}`);
             })
@@ -73,7 +78,7 @@ function App() {
                 }
             })
             .catch(err => {
-                handleInfoPopup(authNo, 'Вы ввели неправильные имя или пароль');
+                handleInfoPopup(iconError, 'Вы ввели неправильные имя или пароль');
                 handleOpenPopup();
                 console.error(`Ошибка авторизации: ${err}`);
             })
@@ -86,9 +91,9 @@ function App() {
                 .then(resultUser => {
                     setCurrentUser(resultUser)
                 })
-                .catch(err => console.log(`Ошибка загрузки с сервера: ${err}`))
+                .catch(err => console.error(`Ошибка загрузки с сервера: ${err}`))
         }
-    }, [loggedIn])
+    }, [loggedIn, setCurrentUser])
 
     //загрузка информации о пользователе на сервер
     function handleUpdateUser ({ name, email }) {
@@ -96,17 +101,40 @@ function App() {
             .then(resultUser => {
                 setCurrentUser(resultUser)
             })
-            .catch(err => console.log(`Ошибка отправки данных о пользователе на сервер: ${err}`))
+            .catch(err => console.error(`Ошибка отправки данных о пользователе на сервер: ${err}`))
     }
 
     //загрузка фильмов со стороннего сервера
-    function getBeatFilms () {
+    function getBeatFilms() {
         moviesApi.getBeatFilmCardList()
             .then(resultMovies => {
                 setMovies(resultMovies)
             })
-            .catch(err => console.log(`Ошибка загрузки фильмов с сервера: ${err}`))
+            .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
     }
+
+    //сохранение фильма в избранное/лайк
+    function handleSaveMovie (movie, isLiked)  {
+        // const isLiked = savedMovies.some(m => m.movieId === movie.id); //возвращается true or false
+
+        if(!isLiked) {
+            mainApi.saveMovie(movie)
+                .then(movies => setSavedMovies([movies, ...savedMovies]))
+                .catch(err => console.error(`Ошибка сохранения фильма в избранное: ${err}`))
+        } else {
+            const savedMovie = savedMovies.find(m => m.movieId === movie.id) //возвращаается необходимый фильм
+
+            mainApi.deleteMovie(savedMovie.id)
+                .then(() => setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.id)))
+                .catch(err => console.log(`Ошибка удаления фильма из избранного: ${err}`))
+        }
+    }
+
+    //получение списка сохраненных фильмов
+    React.useEffect(() => {
+        mainApi.getSavedMoviesList()
+            .then(savedMovies => setSavedMovies(savedMovies.reverse()))
+    }, [setSavedMovies])
 
     function showPreloader () {
         setIsPreloader(true);
@@ -193,11 +221,14 @@ function App() {
                             element={
                                 <ProtectedRoute
                                     loggedIn={loggedIn}
+                                    setLoggedIn={setLoggedIn}
                                     element={Movies}
                                     movies={movies}
                                     getBeatFilms={getBeatFilms}
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
+                                    onSaveMovie={handleSaveMovie}
+                                    savedMovies={savedMovies}
                                 />
                             }
                         />
@@ -206,9 +237,11 @@ function App() {
                             element={
                                 <ProtectedRoute
                                     loggedIn={loggedIn}
+                                    setLoggedIn={setLoggedIn}
                                     element={SavedMovies}
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
+                                    movies={savedMovies}
                                 />
                             }
                         />
@@ -217,8 +250,8 @@ function App() {
                             element={
                                 <ProtectedRoute
                                     loggedIn={loggedIn}
-                                    element={Profile}
                                     setLoggedIn={setLoggedIn}
+                                    element={Profile}
                                     onUpdateUser={handleUpdateUser}
                                 />
                             }

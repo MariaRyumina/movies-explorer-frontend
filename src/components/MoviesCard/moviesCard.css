@@ -28,6 +28,11 @@
     grid-area: icon;
     align-self: start;
     cursor: pointer;
+    border: none;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    background-image: url("../../images/icon_delete_movie.svg");
 }
 
 .movieCard__delete:hover {
@@ -38,10 +43,21 @@
     grid-area: icon;
     align-self: start;
     cursor: pointer;
+    border: none;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    background-image: url("../../images/icon_dislike_movie.svg");
+    transition: background-image .3s;
 }
 
 .movieCard__like:hover {
     opacity: .8;
+}
+
+.movieCard__like_active {
+    background-image: url("../../images/icon_like_movie.svg");
+    transition: background-image .3s;
 }
 
 .movieCard__name {

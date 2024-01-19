@@ -34,7 +34,7 @@ class MainApi {
         })
             .then(res => this._handleResponse(res))
             .then((data) => {
-                if (data != null && data.token ) {
+                if (data != null && data.token) {
                     localStorage.setItem('jwt', data.token);
                     return true;
                 }
@@ -83,25 +83,11 @@ class MainApi {
             .then(res => this._handleResponse(res))
     }
 
-    //лайк/дизлайк фильма
-    changeLikeMoviesCardStatus(id, isLike) {
-        const token = localStorage.getItem('jwt');
-
-        return fetch(`${this._baseUrl}/movies`, {
-            method: isLike ? 'PUT' : 'DELETE',
-            headers: {
-                authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(res => this._handleResponse(res))
-    }
-
     //загрузка сохраненных фильмов
     getSavedMoviesList() {
         const token = localStorage.getItem('jwt');
 
-        return fetch(`${this._baseUrl}/saved-movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             headers: {
                 authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -110,17 +96,31 @@ class MainApi {
             .then(res => this._handleResponse(res))
     }
 
-    //сохранение фильма на сервер
-    addSavedMovieCard({ name, link }) {
+    //сохранение фильма/добавление в избранное
+    saveMovie(movie) {
         const token = localStorage.getItem('jwt');
 
-        return fetch(`${this._baseUrl}/saved-movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             headers: {
                 authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, link })
+            body: JSON.stringify(movie)
+        })
+            .then(res => this._handleResponse(res))
+    }
+
+    //удаление фильма
+    deleteMovie(id) {
+        const token = localStorage.getItem('jwt');
+
+        return fetch(`${this._baseUrl}/movies/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
         })
             .then(res => this._handleResponse(res))
     }

@@ -13,13 +13,26 @@ class MoviesApi {
 
     //загрузка фильмов с внешнего сервера на сайт
     getBeatFilmCardList() {
-        return fetch(this._baseUrl, {
+        return fetch(this._baseUrl + "/beatfilm-movies", {
             headers: {
                 'Content-Type': 'application/json',
             },
         })
-            .then(res => this._handleResponse(res));
+            .then(res => this._handleResponse(res))
+            .then(movies => movies.map(elem => ({
+                country: elem.country,
+                director: elem.director,
+                duration: elem.duration,
+                year: elem.year,
+                description: elem.description,
+                image: this._baseUrl + elem.image.url,
+                trailerLink: elem.trailerLink,
+                nameRU: elem.nameRU,
+                nameEN: elem.nameEN,
+                thumbnail: this._baseUrl + elem.image.url,
+                movieId: elem.id,
+            })));
     }
 }
 
-export const moviesApi = new MoviesApi('https://api.nomoreparties.co/beatfilm-movies');
+export const moviesApi = new MoviesApi('https://api.nomoreparties.co');

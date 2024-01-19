@@ -1,8 +1,8 @@
 import './searchForm.css';
 import iconSearch from '../../images/icon_search.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import authNo from '../../images/auth_no.png';
-import {useState} from "react";
+import iconError from '../../images/icon_error.png';
+import { useState } from "react";
 
 export default function SearchForm({ getBeatFilms, infoPopup, openPopup }) {
     const [valueInput, setValueInput] = useState('');
@@ -17,7 +17,7 @@ export default function SearchForm({ getBeatFilms, infoPopup, openPopup }) {
         if (valueInput !== '') {
             getBeatFilms();
         } else {
-            infoPopup(authNo, 'Введите название фильма!');
+            infoPopup(iconError, 'Введите название фильма!');
             openPopup();
         }
     }

@@ -3,9 +3,12 @@ import { useLocation } from "react-router-dom";
 import './moviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList({ movies }) {
+export default function MoviesCardList({
+                                           movies,
+                                           onSaveMovie,
+                                           savedMovies
+}) {
     const location = useLocation();
-
 
     return (
         <section className="moviesCardList">
@@ -14,11 +17,14 @@ export default function MoviesCardList({ movies }) {
                     <MoviesCard
                         key={movie._movieId}
                         movie={movie}
+                        onSaveMovie={onSaveMovie}
+                        savedMovies={savedMovies}
                     />
                 ))}
-            </div>
 
-            { location.pathname === '/movies' && <button className="moviesCardList__more">Ещё</button> }
+            </div>
+            
+            { location.pathname === '/movies' && movies.length > 1 && <button className="moviesCardList__more">Ещё</button> }
         </section>
     )
 }

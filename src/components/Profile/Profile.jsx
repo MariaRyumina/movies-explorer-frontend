@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import './profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Profile({ setLoggedIn, onUpdateUser }) {
     const [showEditBtn, setShowEditBtn] = useState(true);

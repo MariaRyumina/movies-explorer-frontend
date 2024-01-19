@@ -52,6 +52,14 @@
     line-height: normal;
 }
 
+.login__input:-webkit-autofill,
+.login__input:-webkit-autofill:hover,
+.login__input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 40rem #202020 inset;
+    caret-color: #fff;
+}
+
 .login__input {
     padding: 4px 0 9px;
     border: none;
