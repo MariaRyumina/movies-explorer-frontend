@@ -1,20 +1,24 @@
 import './moviesCard.css';
-import React, { useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 
 export default function MoviesCard({
                                        movie,
                                        onSaveMovie,
-                                       savedMovies
+                                       onDeleteMovie,
 }) {
     const location = useLocation();
 
-    const isLiked = savedMovies.some(m => m.movieId === movie.id); //возвращается true or false
-
+    //лайк/сохранение в избранное
     function handleSaveMovie () {
-        onSaveMovie(movie, isLiked);
+        onSaveMovie(movie);
     }
 
+    function handleDeleteMovie () {
+        onDeleteMovie(movie);
+    }
+
+    //пересчет длительности фильма из минут в часы и минуты
     function getTimeFromMin (min) {
         let hours = Math.trunc(min/60);
         let minutes = min % 60;
@@ -28,13 +32,15 @@ export default function MoviesCard({
             </a>
             <h3 className="movieCard__name">{movie.nameRU}</h3>
             { location.pathname === '/saved-movies' ? (
-                    <button className="movieCard__delete" />
+                    <button
+                        onClick={handleDeleteMovie}
+                        className="movieCard__delete" />
                 ) : (
                     <button
                         onClick={handleSaveMovie}
-                        className={!isLiked ? "movieCard__like" : "movieCard__like movieCard__like_active"} />
+                        className={`movieCard__like ${movie.isLiked &&'movieCard__like_active'}`} />
                 ) }
-            <div className="movieCard__duration">{ getTimeFromMin(movie.duration) }</div>
+            <div className="movieCard__duration">{getTimeFromMin(movie.duration)}</div>
         </section>
     )
 }

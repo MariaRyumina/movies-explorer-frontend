@@ -29,7 +29,7 @@ class MoviesApi {
                 trailerLink: elem.trailerLink,
                 nameRU: elem.nameRU,
                 nameEN: elem.nameEN,
-                thumbnail: this._baseUrl + elem.image.url,
+                thumbnail: this._baseUrl + elem.image.formats.thumbnail.url,
                 movieId: elem.id,
             })));
     }

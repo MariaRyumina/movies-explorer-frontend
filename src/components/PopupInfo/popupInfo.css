@@ -10,7 +10,7 @@
     justify-content: center;
     visibility: hidden;
     opacity: 0;
-    transition: visibility .5s,opacity .5s linear;
+    transition: visibility .3s, opacity .3s linear;
     cursor: pointer;
 }
 
@@ -22,7 +22,7 @@
 .popup__container {
     position: relative;
     background-color: #2f2f2f;
-    border-radius: 10px;
+    border-radius: 3px;
     margin: auto;
     padding: 10px 20px;
     box-sizing: border-box;

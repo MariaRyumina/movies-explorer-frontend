@@ -2,11 +2,18 @@ import './searchForm.css';
 import iconSearch from '../../images/icon_search.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import iconError from '../../images/icon_error.png';
-import { useState } from "react";
+import { useEffect } from "react";
 
-export default function SearchForm({ getBeatFilms, infoPopup, openPopup }) {
-    const [valueInput, setValueInput] = useState('');
-
+export default function SearchForm({
+                                       valueInput,
+                                       setValueInput,
+                                       getBeatFilms,
+                                       infoPopup,
+                                       openPopup,
+                                       movies,
+                                       isShortMovies,
+                                       setIsShortMovies,
+                                   }) {
     function handleChangeInput (e) {
         setValueInput(e.target.value)
     }
@@ -14,7 +21,9 @@ export default function SearchForm({ getBeatFilms, infoPopup, openPopup }) {
     function getFilms (e) {
         e.preventDefault();
 
-        if (valueInput !== '') {
+        if (movies.length === 0 && valueInput !== '') {
+            getBeatFilms();
+        } else if (movies.length !== 0 && valueInput !== '') {
             getBeatFilms();
         } else {
             infoPopup(iconError, 'Введите название фильма!');
@@ -38,7 +47,11 @@ export default function SearchForm({ getBeatFilms, infoPopup, openPopup }) {
                     />
                     <button className="search__btn" onClick={getFilms}>Найти</button>
                 </form>
-                <FilterCheckbox />
+                <FilterCheckbox
+                    isShortMovies={isShortMovies}
+                    setIsShortMovies={setIsShortMovies}
+                    getBeatFilms={getBeatFilms}
+                />
             </div>
         </section>
     )

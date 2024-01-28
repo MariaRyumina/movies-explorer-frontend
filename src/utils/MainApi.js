@@ -106,9 +106,23 @@ class MainApi {
                 authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(movie)
+            body: JSON.stringify({
+                country: movie.country,
+                director: movie.director,
+                duration: movie.duration,
+                year: movie.year,
+                description: movie.description,
+                image: movie.image,
+                trailerLink: movie.trailerLink,
+                nameRU: movie.nameRU,
+                nameEN: movie.nameEN,
+                thumbnail: movie.thumbnail,
+                movieId: movie.movieId,
+            })
         })
-            .then(res => this._handleResponse(res))
+            .then(res => {
+                return this._handleResponse(res)
+            })
     }
 
     //удаление фильма

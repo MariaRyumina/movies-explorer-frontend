@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
@@ -19,22 +19,51 @@ import iconOK from '../../images/icon_ok.png';
 import iconError from '../../images/icon_error.png';
 
 function App() {
-    const [currentUser, setCurrentUser] = React.useState({});
     const location = useLocation();
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState({});
     const [isPreloader, setIsPreloader] = useState(false);
-    const [isOpenPopup, setIsOpenPopup] = useState(false);
+    //иконка и текст в popup
     const [infoPopup, setInfoPopup] = useState({ img: null, title: null });
-    const [movies, setMovies] = useState([]);
+    const [isOpenPopup, setIsOpenPopup] = useState(false);
+    //фильмы сохраненные в ЛС
+    const moviesLS = JSON.parse(localStorage.getItem('movies'));
+    //фильмы с сервера
+    const [movies, setMovies] = useState(moviesLS || []);
+    //фильмы, добавленные в сохраненные
     const [savedMovies, setSavedMovies] = useState([]);
-    // const [loggedIn, setLoggedIn] = React.useState(false);
+    //вошёл пользователь в систему или нет
+    const [loggedIn, setLoggedIn] = useState(() => !!localStorage.getItem("jwt"));
+    //ширина окна браузера
+    const [widthWindow, setWidthWindow] = useState(window.innerWidth);
+    //инпут на странице с фильмами
+    const [valueMoviesInput, setValueMoviesInput] = useState((JSON.parse(localStorage.getItem('valueMoviesInput'))) || '');
+    //короткометражки - вкл или выкл чекбокс
+    const [isShortMovies, setIsShortMovies] = useState((JSON.parse(localStorage.getItem('isShortMovies'))) || false);
 
-    const [loggedIn, setLoggedIn] = React.useState(() => {
-        return !!localStorage.getItem("jwt");
-    }); //вошёл пользователь в систему или нет
+    //сохранение данных в ЛС
+    useEffect(() => {
+        if (loggedIn) {
+            localStorage.setItem('isShortMovies', JSON.stringify(isShortMovies));
+            localStorage.setItem('valueMoviesInput', JSON.stringify(valueMoviesInput));
+        }
+    },[loggedIn, isShortMovies, valueMoviesInput])
+
+    //отслеживаю ширину окна
+    const handleResize = (e) => {
+        setWidthWindow(e.target.innerWidth)
+    }
+
+    //добавляю слушатель на resize window
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    })
 
     //проверка токена на валидность
-    React.useEffect(() => {
+    useEffect(() => {
         const token = localStorage.getItem('jwt');
 
         if(token) {
@@ -62,9 +91,15 @@ function App() {
                 }
             })
             .catch(err => {
-                handleInfoPopup(iconError, 'Что-то пошло не так! Попробуйте ещё раз.');
-                handleOpenPopup();
-                console.error(`Ошибка регистрации: ${err}`);
+                if (err === 409) {
+                    handleInfoPopup(iconError, 'Пользователь с данным email уже зарегистрирован!');
+                    handleOpenPopup();
+                    console.error(`Ошибка регистрации: ${err}`);
+                } else if (err) {
+                    handleInfoPopup(iconError, 'Что-то пошло не так! Попробуйте ещё раз.');
+                    handleOpenPopup();
+                    console.error(`Ошибка регистрации: ${err}`);
+                }
             })
     }
 
@@ -84,57 +119,137 @@ function App() {
             })
     }
 
-    //загрузка информации о пользователе с сервера
-    React.useEffect(() => {
-        if(loggedIn) {
-            mainApi.getUserInfo()
-                .then(resultUser => {
-                    setCurrentUser(resultUser)
-                })
-                .catch(err => console.error(`Ошибка загрузки с сервера: ${err}`))
-        }
-    }, [loggedIn, setCurrentUser])
+    //выход из аккаунта
+    function handleLogout () {
+        localStorage.clear();
+        valueMoviesInput.reset();
+        isShortMovies.reset();
+        setLoggedIn(false);
+    }
 
-    //загрузка информации о пользователе на сервер
+    //загрузка обновленной информации о пользователе на сервер
     function handleUpdateUser ({ name, email }) {
         mainApi.updateUserInfo({ name, email })
-            .then(resultUser => {
-                setCurrentUser(resultUser)
+            .then(resultUser => setCurrentUser(resultUser))
+            .catch(err => {
+                if (err === 409) {
+                    handleInfoPopup(iconError, 'Пользователь с данным email уже зарегистрирован!');
+                    handleOpenPopup();
+                    console.error(`Ошибка отправки данных о пользователе на сервер: ${err}`)
+                } else if (err) {
+                    handleInfoPopup(iconError, 'Что-то пошло не так! Попробуйте ещё раз.');
+                    handleOpenPopup();
+                    console.error(`Ошибка отправки данных о пользователе на сервер: ${err}`)
+                }
             })
-            .catch(err => console.error(`Ошибка отправки данных о пользователе на сервер: ${err}`))
     }
+
+    //загрузка текущей информации о пользователе с сервера / получение списка сохраненных фильмов
+    useEffect(() => {
+        if(loggedIn) {
+            Promise.all([mainApi.getUserInfo(), mainApi.getSavedMoviesList()])
+                .then(([resultUser, savedMovies]) => {
+                    setCurrentUser(resultUser)
+                    setSavedMovies(savedMovies.reverse())
+                })
+                .catch(err => console.error(`Ошибка загрузки данных с сервера: ${err}`))
+        }
+    }, [loggedIn])
 
     //загрузка фильмов со стороннего сервера
     function getBeatFilms() {
-        moviesApi.getBeatFilmCardList()
-            .then(resultMovies => {
-                setMovies(resultMovies)
-            })
-            .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
-    }
-
-    //сохранение фильма в избранное/лайк
-    function handleSaveMovie (movie, isLiked)  {
-        // const isLiked = savedMovies.some(m => m.movieId === movie.id); //возвращается true or false
-
-        if(!isLiked) {
-            mainApi.saveMovie(movie)
-                .then(movies => setSavedMovies([movies, ...savedMovies]))
-                .catch(err => console.error(`Ошибка сохранения фильма в избранное: ${err}`))
+        if ('movies' in localStorage) {
+            setMovies(moviesLS);
         } else {
-            const savedMovie = savedMovies.find(m => m.movieId === movie.id) //возвращаается необходимый фильм
-
-            mainApi.deleteMovie(savedMovie.id)
-                .then(() => setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.id)))
-                .catch(err => console.log(`Ошибка удаления фильма из избранного: ${err}`))
+            showPreloader();
+            moviesApi.getBeatFilmCardList()
+                .then(movies => movies.map(movie => {
+                    if (savedMovies.some(saved => saved.movieId === movie.movieId)) {
+                        movie.isLiked = true;
+                    }
+                    return movie;
+                }))
+                .then(movies => {
+                    setMovies(movies);
+                    localStorage.setItem('movies', JSON.stringify(movies));
+                })
+                .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
+                .finally(() => hidePreloader())
         }
     }
 
-    //получение списка сохраненных фильмов
-    React.useEffect(() => {
-        mainApi.getSavedMoviesList()
-            .then(savedMovies => setSavedMovies(savedMovies.reverse()))
-    }, [setSavedMovies])
+    //лайк/дизлайк фильма на странице "Фильмы"
+    function handleSaveMovie (movie) {
+        if (movie.isLiked) {
+            const savedMovie = savedMovies.find(m => m.movieId === movie.movieId) //возвращается необходимый фильм
+
+            mainApi.deleteMovie(savedMovie._id)
+                .then(() => {
+                    movies.forEach(m => {
+                        if(m.movieId === movie.movieId)
+                            m.isLiked = false
+                    })
+                    setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.movieId))
+                })
+                .catch(err => console.log(`Ошибка удаления фильма из избранного: ${err}`))
+
+        } else {
+            mainApi.saveMovie(movie)
+                .then(movie => {
+                    movies.forEach(m => {
+                        if(m.movieId === movie.movieId)
+                            m.isLiked = true
+                    })
+                    setSavedMovies([movie, ...savedMovies])
+                })
+                .catch(err => console.error(`Ошибка сохранения фильма в избранное: ${err}`))
+        }
+    }
+
+    //удаление фильма со страницы "Сохраненные фильмы"
+    function handleDeleteMovie (savedMovie) {
+        mainApi.deleteMovie(savedMovie._id)
+            .then(() => {
+                movies.forEach(m => {
+                    if(m.movieId === savedMovie.movieId)
+                        m.isLiked = false
+                })
+                setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.movieId))
+            })
+            .catch(err => console.log(`Ошибка удаления фильма из избранного: ${err}`))
+    }
+
+    //фильтрация фильмов по поисковому запросу и чекбоксу
+    const filtrationMovies = (movies) => {
+        return movies.filter(movie =>
+            isShortMovies ? movie.duration <= 40 : movie &&
+                (movie.nameRU.toLowerCase().includes(valueMoviesInput.toLowerCase())
+                    || movie.nameEN.toLowerCase().includes(valueMoviesInput.toLowerCase()))
+        )
+    }
+
+    //изменение картинки и сообщения в попапе InfoPopup
+    function handleInfoPopup(img, title){
+        setInfoPopup({ img, title });
+    }
+
+    function handleOpenPopup () {
+        setIsOpenPopup(true);
+    }
+
+    function closePopup () {
+        setIsOpenPopup(false);
+    }
+
+    //закрытие модального окна нажатием на 'Esc'
+    useEffect(() => {
+        const closePopupOnEsc = (e) => {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
+        }
+        document.addEventListener('keydown', closePopupOnEsc);
+    })
 
     function showPreloader () {
         setIsPreloader(true);
@@ -142,19 +257,6 @@ function App() {
 
     function hidePreloader () {
         setIsPreloader(false);
-    }
-
-    //изменение картинки и сообщения в попапе InfoPopup
-    function handleInfoPopup(img, title){
-        setInfoPopup({ img, title })
-    }
-
-    function handleOpenPopup () {
-        setIsOpenPopup(true)
-    }
-
-    function closePopup () {
-        setIsOpenPopup(false)
     }
 
     return (
@@ -228,7 +330,11 @@ function App() {
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
                                     onSaveMovie={handleSaveMovie}
-                                    savedMovies={savedMovies}
+                                    widthWindow={widthWindow}
+                                    valueInput={valueMoviesInput}
+                                    setValueInput={setValueMoviesInput}
+                                    isShortMovies={isShortMovies}
+                                    setIsShortMovies={setIsShortMovies}
                                 />
                             }
                         />
@@ -242,6 +348,7 @@ function App() {
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
                                     movies={savedMovies}
+                                    onDeleteMovie={handleDeleteMovie}
                                 />
                             }
                         />
@@ -253,6 +360,7 @@ function App() {
                                     setLoggedIn={setLoggedIn}
                                     element={Profile}
                                     onUpdateUser={handleUpdateUser}
+                                    onLogout={handleLogout}
                                 />
                             }
                         />

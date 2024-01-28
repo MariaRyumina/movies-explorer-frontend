@@ -3,7 +3,13 @@ import './savedMovies.css';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-export default function SavedMovies({ infoPopup, openPopup, movies }) {
+export default function SavedMovies({
+                                        infoPopup,
+                                        openPopup,
+                                        movies,
+                                        onDeleteMovie,
+                                    }) {
+
     return (
         <>
             <SearchForm
@@ -12,6 +18,7 @@ export default function SavedMovies({ infoPopup, openPopup, movies }) {
             />
             <MoviesCardList
                 movies={movies}
+                onDeleteMovie={onDeleteMovie}
             />
         </>
     )

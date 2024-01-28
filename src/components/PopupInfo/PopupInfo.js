@@ -1,6 +1,11 @@
 import './popupInfo.css';
 
-export default function PopupInfo ({ isOpen, onClose, img, title }) {
+export default function PopupInfo ({
+                                       isOpen,
+                                       onClose,
+                                       img,
+                                       title
+}) {
 
     return (
         <div className={`popup popup_content_info ${isOpen ? 'popup_opened' : ''}`}>
