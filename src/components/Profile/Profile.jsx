@@ -2,10 +2,13 @@ import React, {useContext, useEffect, useState} from "react";
 import './profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from "react-router-dom";
+import iconOk from "../../images/icon_ok.png";
 
 export default function Profile({
                                     onUpdateUser,
                                     onLogout,
+                                    infoPopup,
+                                    openPopup,
                                 }) {
     const [showEditBtn, setShowEditBtn] = useState(true);
     const [showSaveBtn, setShowSaveBtn] = useState(false);
@@ -60,7 +63,6 @@ export default function Profile({
     }
 
     const blurHandle = (e) => {
-        console.log(e.target.value)
         switch (e.target.name) {
             case 'email':
                 setEmailDirty(true)
@@ -76,6 +78,8 @@ export default function Profile({
     function handleSubmit (e) {
         e.preventDefault();
         onUpdateUser({ name, email })
+        infoPopup(iconOk, 'Данные успешно обновлены!');
+        openPopup();
     }
 
     function handleEdit () {
@@ -134,6 +138,7 @@ export default function Profile({
                 </label>
                 <div className={ showEditBtn ? "profile__edit" : "profile__edit profile__edit_hidden" }>
                     <button
+                        type="button"
                         onClick={handleEdit}
                         className="profile__btn-edit"
                     >

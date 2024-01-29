@@ -379,6 +379,8 @@ function App() {
                                     element={Profile}
                                     onUpdateUser={handleUpdateUser}
                                     onLogout={handleLogout}
+                                    infoPopup={handleInfoPopup}
+                                    openPopup={handleOpenPopup}
                                 />
                             }
                         />
