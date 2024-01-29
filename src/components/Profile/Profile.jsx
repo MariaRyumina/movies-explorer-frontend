@@ -2,10 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import './profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from "react-router-dom";
-import iconOK from "../../images/icon_ok.png";
 
 export default function Profile({
-                                    setLoggedIn,
                                     onUpdateUser,
                                     onLogout,
                                 }) {
@@ -14,11 +12,11 @@ export default function Profile({
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState(currentUser.name);
     const [email, setEmail] = useState(currentUser.email);
-    const [emailDirty, setEmailDirty] = useState(false);
-    const [nameDirty, setNameDirty] = useState(false);
-    const [emailError, setEmailError] = useState('Обязательное поле');
-    const [nameError, setNameError] = useState('Обязательное поле');
-    const [formValid, setFormValid] = useState(false);
+    const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
+    const [nameDirty, setNameDirty] = useState(false); //проверяет, был ли курсор в input
+    const [emailError, setEmailError] = useState(''); //отображает текст ошибки
+    const [nameError, setNameError] = useState(''); //отображает текст ошибки
+    const [formValid, setFormValid] = useState(false); //валидна форма или нет
 
     useEffect(() => {
         setName(currentUser.name)
@@ -32,16 +30,6 @@ export default function Profile({
             setFormValid(true)
         }
     }, [emailError, nameError])
-
-    function handleEdit () {
-        setShowEditBtn(false);
-        setShowSaveBtn(true);
-    }
-
-    function handleSave () {
-        setShowSaveBtn(false);
-        setShowEditBtn(true);
-    }
 
     function handleChangeName (e) {
         setName(e.target.value);
@@ -59,7 +47,7 @@ export default function Profile({
     function handleChangeEmail (e) {
         setEmail(e.target.value);
 
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (!reg.test(String(e.target.value).toLowerCase())) {
             setEmailError('Введите корректный e-mail адрес');
@@ -72,6 +60,7 @@ export default function Profile({
     }
 
     const blurHandle = (e) => {
+        console.log(e.target.value)
         switch (e.target.name) {
             case 'email':
                 setEmailDirty(true)
@@ -80,6 +69,7 @@ export default function Profile({
                 setNameDirty(true)
                 break
             default:
+                console.error('для поля не добавлен эффект blur')
         }
     }
 
@@ -88,7 +78,15 @@ export default function Profile({
         onUpdateUser({ name, email })
     }
 
+    function handleEdit () {
+        setShowEditBtn(false);
+        setShowSaveBtn(true);
+    }
 
+    function handleSave () {
+        setShowSaveBtn(false);
+        setShowEditBtn(true);
+    }
 
     return (
         <section className="profile">

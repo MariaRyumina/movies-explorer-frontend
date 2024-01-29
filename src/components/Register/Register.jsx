@@ -7,18 +7,13 @@ export default function Register({ onRegister }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [nameDirty, setNameDirty] = useState(false);
-    const [emailDirty, setEmailDirty] = useState(false);
-    const [passwordDirty, setPasswordDirty] = useState(false);
-    const [nameError, setNameError] = useState('Обязательное поле');
-    const [emailError, setEmailError] = useState('Обязательное поле');
-    const [passwordError, setPasswordError] = useState('Обязательное поле');
-    const [formValid, setFormValid] = useState(false);
-
-    function handleSubmit(e) {
-        e.preventDefault()
-        onRegister( name, email, password );
-    }
+    const [nameDirty, setNameDirty] = useState(false); //проверяет, был ли курсор в input
+    const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
+    const [passwordDirty, setPasswordDirty] = useState(false); //проверяет, был ли курсор в input
+    const [nameError, setNameError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [emailError, setEmailError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [passwordError, setPasswordError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [formValid, setFormValid] = useState(false); //валидна форма или нет
 
     useEffect(() => {
         if (nameError || emailError || passwordError) {
@@ -44,7 +39,7 @@ export default function Register({ onRegister }) {
     const emailHandler = (e) => {
         setEmail(e.target.value);
 
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (!reg.test(String(e.target.value).toLowerCase())) {
             setEmailError('Введите корректный e-mail адрес');
@@ -69,18 +64,31 @@ export default function Register({ onRegister }) {
         }
     }
 
+    //blurHandle срабатывает, когда пользователь покинул поле ввода
     const blurHandle = (e) => {
-        switch (e.target.name) {
-            case 'name':
-                setNameDirty(true)
-                break
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'password':
-                setPasswordDirty(true)
-                break
+        const attributeName = e.target.name;
+
+        if (attributeName === 'name') {
+            setNameDirty(true);
+            return;
         }
+
+        if (attributeName === 'email') {
+            setEmailDirty(true);
+            return;
+        }
+
+        if (attributeName === 'password') {
+            setPasswordDirty(true)
+            return;
+        }
+
+        console.error(`не добавлено в функцию blurHandle input ${attributeName}`);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        onRegister( name, email, password );
     }
 
     return (

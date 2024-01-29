@@ -12,13 +12,12 @@ export default function AboutMe() {
                     <p className="aboutMe__description">
                         Я родилась на Дальнем Востоке в Хабаровске, где выучилась на инженера-строителя.
                         Сейчас учусь на веб-разработчика.
-                        Люблю слушать музыку, танцевать, спорт, мотоциклы и шить.
+                        Люблю слушать музыку, танцевать, спорт, мотоциклы и шить. Главное в жизни - саморазвитие.
                     </p>
-                    <a href="https://github.com/MariaRyumina" target="_blank" className="aboutMe__github-link">Github</a>
+                    <a href="https://github.com/MariaRyumina" rel="noopener noreferrer" className="aboutMe__github-link">Github</a>
                 </div>
                 <img src={imgMe} alt="аватар" className="aboutMe__avatar" />
             </div>
         </section>
     )
 }
-

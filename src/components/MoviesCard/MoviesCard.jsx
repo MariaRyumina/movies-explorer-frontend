@@ -27,7 +27,7 @@ export default function MoviesCard({
 
     return (
         <section className="movieCard">
-            <a className="movieCard__trailer" href={movie.trailerLink} target="_blank">
+            <a className="movieCard__trailer" href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
                 <img src={movie.image} alt={movie.nameRU} className="movieCard__img" />
             </a>
             <h3 className="movieCard__name">{movie.nameRU}</h3>

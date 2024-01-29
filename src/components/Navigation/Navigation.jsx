@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './navigation.css';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import profileLogoImg from '../../images/icon_user.svg';
@@ -8,7 +8,7 @@ export default function Navigation({ loggedIn }) {
     const [nav, setNav] = React.useState(false);
     const location = useLocation();
 
-    React.useEffect(() => {
+    useEffect(() => {
         const handleResize = (evt) => setWidth(evt.target.innerWidth);
         window.addEventListener('resize', handleResize);
         return () => {

@@ -1,18 +1,15 @@
 import './searchForm.css';
 import iconSearch from '../../images/icon_search.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import iconError from '../../images/icon_error.png';
-import { useEffect } from "react";
+import React from "react";
 
 export default function SearchForm({
                                        valueInput,
                                        setValueInput,
-                                       getBeatFilms,
-                                       infoPopup,
-                                       openPopup,
+                                       searchMovies,
+                                       moviesFiltration,
+                                       setMovies,
                                        movies,
-                                       isShortMovies,
-                                       setIsShortMovies,
                                    }) {
     function handleChangeInput (e) {
         setValueInput(e.target.value)
@@ -20,15 +17,7 @@ export default function SearchForm({
 
     function getFilms (e) {
         e.preventDefault();
-
-        if (movies.length === 0 && valueInput !== '') {
-            getBeatFilms();
-        } else if (movies.length !== 0 && valueInput !== '') {
-            getBeatFilms();
-        } else {
-            infoPopup(iconError, 'Введите название фильма!');
-            openPopup();
-        }
+        searchMovies();
     }
 
     return (
@@ -45,12 +34,17 @@ export default function SearchForm({
                         placeholder="Поиск фильма"
                         className="search__input"
                     />
-                    <button className="search__btn" onClick={getFilms}>Найти</button>
+                    <button
+                        className="search__btn"
+                        onClick={getFilms}
+                    >
+                        Найти
+                    </button>
                 </form>
                 <FilterCheckbox
-                    isShortMovies={isShortMovies}
-                    setIsShortMovies={setIsShortMovies}
-                    getBeatFilms={getBeatFilms}
+                    moviesFiltration={moviesFiltration}
+                    setMovies={setMovies}
+                    movies={movies}
                 />
             </div>
         </section>

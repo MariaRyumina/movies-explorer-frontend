@@ -29,25 +29,24 @@ function App() {
     //фильмы сохраненные в ЛС
     const moviesLS = JSON.parse(localStorage.getItem('movies'));
     //фильмы с сервера
-    const [movies, setMovies] = useState(moviesLS || []);
+    const [movies, setMovies] = useState(moviesLS ?? []);
     //фильмы, добавленные в сохраненные
     const [savedMovies, setSavedMovies] = useState([]);
     //вошёл пользователь в систему или нет
-    const [loggedIn, setLoggedIn] = useState(() => !!localStorage.getItem("jwt"));
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem("jwt") ?? false);
     //ширина окна браузера
     const [widthWindow, setWidthWindow] = useState(window.innerWidth);
     //инпут на странице с фильмами
     const [valueMoviesInput, setValueMoviesInput] = useState((JSON.parse(localStorage.getItem('valueMoviesInput'))) || '');
-    //короткометражки - вкл или выкл чекбокс
-    const [isShortMovies, setIsShortMovies] = useState((JSON.parse(localStorage.getItem('isShortMovies'))) || false);
+    //указывает, был ли запрос на сервер и загружены ли фильмы
+    const [isLoaded, setIsLoaded] = useState(false);
 
     //сохранение данных в ЛС
     useEffect(() => {
         if (loggedIn) {
-            localStorage.setItem('isShortMovies', JSON.stringify(isShortMovies));
             localStorage.setItem('valueMoviesInput', JSON.stringify(valueMoviesInput));
         }
-    },[loggedIn, isShortMovies, valueMoviesInput])
+    },[loggedIn, valueMoviesInput])
 
     //отслеживаю ширину окна
     const handleResize = (e) => {
@@ -122,8 +121,9 @@ function App() {
     //выход из аккаунта
     function handleLogout () {
         localStorage.clear();
-        valueMoviesInput.reset();
-        isShortMovies.reset();
+        setValueMoviesInput('');
+        setMovies([]);
+        setIsLoaded(false);
         setLoggedIn(false);
     }
 
@@ -154,28 +154,28 @@ function App() {
                 })
                 .catch(err => console.error(`Ошибка загрузки данных с сервера: ${err}`))
         }
-    }, [loggedIn])
+    }, [loggedIn, valueMoviesInput])
 
     //загрузка фильмов со стороннего сервера
     function getBeatFilms() {
-        if ('movies' in localStorage) {
-            setMovies(moviesLS);
-        } else {
-            showPreloader();
-            moviesApi.getBeatFilmCardList()
-                .then(movies => movies.map(movie => {
-                    if (savedMovies.some(saved => saved.movieId === movie.movieId)) {
-                        movie.isLiked = true;
-                    }
-                    return movie;
-                }))
-                .then(movies => {
-                    setMovies(movies);
-                    localStorage.setItem('movies', JSON.stringify(movies));
-                })
-                .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
-                .finally(() => hidePreloader())
-        }
+        console.log("отработал getBeatFilms")
+        showPreloader();
+        moviesApi.getBeatFilmCardList()
+            .then(movies => movies.map(movie => {
+                if (savedMovies.some(saved => saved.movieId === movie.movieId)) {
+                    movie.isLiked = true;
+                }
+                return movie;
+            }))
+            .then(movies => {
+                setMovies(movies);
+                localStorage.setItem('movies', JSON.stringify(movies));
+            })
+            .then(() => {
+                setIsLoaded(true);
+            })
+            .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
+            .finally(() => hidePreloader());
     }
 
     //лайк/дизлайк фильма на странице "Фильмы"
@@ -220,12 +220,25 @@ function App() {
     }
 
     //фильтрация фильмов по поисковому запросу и чекбоксу
-    const filtrationMovies = (movies) => {
-        return movies.filter(movie =>
-            isShortMovies ? movie.duration <= 40 : movie &&
-                (movie.nameRU.toLowerCase().includes(valueMoviesInput.toLowerCase())
-                    || movie.nameEN.toLowerCase().includes(valueMoviesInput.toLowerCase()))
-        )
+    function moviesFiltration (moviesList, hook) {
+        moviesList = moviesList ?? [];
+
+        if (localStorage.getItem("isShortMovies") === "true") {
+            moviesList = moviesList.filter(movie => movie.duration <= 40);
+        }
+
+        if (valueMoviesInput) {
+            moviesList = moviesList.filter(movie => movie.nameRU.toLowerCase().includes(valueMoviesInput.toLowerCase())
+                || movie.nameEN.toLowerCase().includes(valueMoviesInput.toLowerCase()));
+        }
+
+        if (moviesList.length === 0) {
+            handleInfoPopup(iconError, 'Ничего не найдено');
+            handleOpenPopup();
+        }
+
+        localStorage.setItem('movies', JSON.stringify(moviesList));
+        hook(moviesList);
     }
 
     //изменение картинки и сообщения в попапе InfoPopup
@@ -326,6 +339,7 @@ function App() {
                                     setLoggedIn={setLoggedIn}
                                     element={Movies}
                                     movies={movies}
+                                    setMovies={setMovies}
                                     getBeatFilms={getBeatFilms}
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
@@ -333,8 +347,8 @@ function App() {
                                     widthWindow={widthWindow}
                                     valueInput={valueMoviesInput}
                                     setValueInput={setValueMoviesInput}
-                                    isShortMovies={isShortMovies}
-                                    setIsShortMovies={setIsShortMovies}
+                                    isLoaded={isLoaded}
+                                    moviesFiltration={moviesFiltration}
                                 />
                             }
                         />
@@ -348,7 +362,11 @@ function App() {
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
                                     movies={savedMovies}
+                                    setSavedMovies={setSavedMovies}
                                     onDeleteMovie={handleDeleteMovie}
+                                    valueInput={valueMoviesInput}
+                                    setValueInput={setValueMoviesInput}
+                                    moviesFiltration={moviesFiltration}
                                 />
                             }
                         />

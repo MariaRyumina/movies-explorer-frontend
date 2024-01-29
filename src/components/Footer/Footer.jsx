@@ -7,8 +7,8 @@ export default function Footer() {
             <div className="footer__info">
                 <p className="footer__copyright">&copy; 2023</p>
                 <nav className="footer__links">
-                    <a href="https://practicum.yandex.ru/" target="_blank" className="footer__link">Яндекс.Практикум</a>
-                    <a href="https://github.com/" target="_blank" className="footer__link">Github</a>
+                    <a href="https://practicum.yandex.ru/" target="_blank" className="footer__link" rel="noopener noreferrer">Яндекс.Практикум</a>
+                    <a href="https://github.com/" target="_blank" className="footer__link" rel="noopener noreferrer">Github</a>
                 </nav>
             </div>
         </footer>

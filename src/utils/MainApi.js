@@ -141,6 +141,5 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-    baseUrl: 'http://localhost:3000',
-    // baseUrl: 'https://api.movies.ryumina.nomoredomainsmonster.ru',
+    baseUrl: 'https://api.movies.ryumina.nomoredomainsmonster.ru',
 })

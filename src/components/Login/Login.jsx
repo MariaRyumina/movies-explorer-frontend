@@ -6,16 +6,11 @@ import { Link } from 'react-router-dom';
 export default function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [emailDirty, setEmailDirty] = useState(false);
-    const [passwordDirty, setPasswordDirty] = useState(false);
-    const [emailError, setEmailError] = useState('Обязательное поле');
-    const [passwordError, setPasswordError] = useState('Обязательное поле');
-    const [formValid, setFormValid] = useState(false);
-
-    function handleSubmit(e) {
-        e.preventDefault()
-        onLogin( email, password );
-    }
+    const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
+    const [passwordDirty, setPasswordDirty] = useState(false); //проверяет, был ли курсор в input
+    const [emailError, setEmailError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [passwordError, setPasswordError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [formValid, setFormValid] = useState(false); //валидна форма или нет
 
     useEffect(() => {
         if (emailError || passwordError) {
@@ -28,7 +23,7 @@ export default function Login({ onLogin }) {
     const emailHandler = (e) => {
         setEmail(e.target.value);
 
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (!reg.test(String(e.target.value).toLowerCase())) {
             setEmailError('Введите корректный e-mail адрес');
@@ -53,15 +48,26 @@ export default function Login({ onLogin }) {
         }
     }
 
+    //blurHandle срабатывает, когда пользователь покинул поле ввода
     const blurHandle = (e) => {
-        switch (e.target.name) {
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'password':
-                setPasswordDirty(true)
-                break
+        const attributeName = e.target.name;
+
+        if (attributeName === 'email') {
+            setEmailDirty(true);
+            return;
         }
+
+        if (attributeName === 'password') {
+            setPasswordDirty(true)
+            return;
+        }
+
+        console.error(`не добавлено в функцию blurHandle input ${attributeName}`);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        onLogin( email, password );
     }
 
     return (
