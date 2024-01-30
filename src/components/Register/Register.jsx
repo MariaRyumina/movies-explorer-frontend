@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './register.css';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
+import {
+    ERROR_VALIDATION_INCORRECT_EMAIL,
+    ERROR_VALIDATION_INCORRECT_NAME,
+    ERROR_VALIDATION_INCORRECT_PASSWORD,
+    ERROR_VALIDATION_REQUIRED_FIELD,
+    REG_EXP_EMAIL,
+    VALID_NAME_LENGTH,
+    VALID_PASSWORD_LENGTH,
+} from "../../utils/constants";
 
 export default function Register({ onRegister }) {
     const [name, setName] = useState('');
@@ -10,9 +19,9 @@ export default function Register({ onRegister }) {
     const [nameDirty, setNameDirty] = useState(false); //проверяет, был ли курсор в input
     const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
     const [passwordDirty, setPasswordDirty] = useState(false); //проверяет, был ли курсор в input
-    const [nameError, setNameError] = useState('Обязательное поле'); //отображает текст ошибки
-    const [emailError, setEmailError] = useState('Обязательное поле'); //отображает текст ошибки
-    const [passwordError, setPasswordError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [nameError, setNameError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
+    const [emailError, setEmailError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
+    const [passwordError, setPasswordError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
     const [formValid, setFormValid] = useState(false); //валидна форма или нет
 
     useEffect(() => {
@@ -26,10 +35,10 @@ export default function Register({ onRegister }) {
     const nameHandler = (e) => {
         setName(e.target.value);
 
-        if (e.target.value.length < 2) {
-            setNameError('Имя должно быть длиннее 2 символов');
+        if (e.target.value.length < VALID_NAME_LENGTH) {
+            setNameError(ERROR_VALIDATION_INCORRECT_NAME);
             if (!e.target.value) {
-                setNameError('Обязательное поле');
+                setNameError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setNameError('')
@@ -39,12 +48,10 @@ export default function Register({ onRegister }) {
     const emailHandler = (e) => {
         setEmail(e.target.value);
 
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        if (!reg.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Введите корректный e-mail адрес');
+        if (!REG_EXP_EMAIL.test(String(e.target.value).toLowerCase())) {
+            setEmailError(ERROR_VALIDATION_INCORRECT_EMAIL);
             if (!e.target.value) {
-                setEmailError('Обязательное поле');
+                setEmailError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setEmailError('')
@@ -54,10 +61,10 @@ export default function Register({ onRegister }) {
     const passwordHandler = (e) => {
         setPassword(e.target.value);
 
-        if (e.target.value.length < 4) {
-            setPasswordError('Пароль должен быть длиннее 4 символов');
+        if (e.target.value.length < VALID_PASSWORD_LENGTH) {
+            setPasswordError(ERROR_VALIDATION_INCORRECT_PASSWORD);
             if (!e.target.value) {
-                setPasswordError('Обязательное поле');
+                setPasswordError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setPasswordError('')

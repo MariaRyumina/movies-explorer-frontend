@@ -2,7 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import './moviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { SCREEN_LARGE, SCREEN_MEDIUM, SCREEN_SMALL } from "../../utils/const-breakpoints";
+import {
+    LARGE_SCREEN,
+    MEDIUM_SCREEN,
+    SMALL_SCREEN,
+    MORE_MOVIES_ON_LARGE_SCREEN,
+    MORE_MOVIES_ON_MEDIUM_SCREEN,
+    MORE_MOVIES_ON_SMALL_SCREEN,
+    INITIAL_MOVIES_ON_LARGE_SCREEN,
+    INITIAL_MOVIES_ON_MEDIUM_SCREEN,
+    INITIAL_MOVIES_ON_SMALL_SCREEN,
+    INITIAL_MOVIES_ON_X_SMALL_SCREEN,
+} from "../../utils/constants";
 
 export default function MoviesCardList({
                                            movies,
@@ -15,25 +26,25 @@ export default function MoviesCardList({
 
     //количество отображаемых карточек
     useEffect(() => {
-        if (widthWindow >= SCREEN_LARGE) {
-            setInitialMovies(16)
-        } else if (widthWindow >= SCREEN_MEDIUM) {
-            setInitialMovies(9)
-        } else if (widthWindow >= SCREEN_SMALL) {
-            setInitialMovies(8)
+        if (widthWindow >= LARGE_SCREEN) {
+            setInitialMovies(INITIAL_MOVIES_ON_LARGE_SCREEN)
+        } else if (widthWindow >= MEDIUM_SCREEN) {
+            setInitialMovies(INITIAL_MOVIES_ON_MEDIUM_SCREEN)
+        } else if (widthWindow >= SMALL_SCREEN) {
+            setInitialMovies(INITIAL_MOVIES_ON_SMALL_SCREEN)
         } else {
-            setInitialMovies(5)
+            setInitialMovies(INITIAL_MOVIES_ON_X_SMALL_SCREEN)
         }
     }, [widthWindow])
 
     //изменение количества отображаемых карточек нажатием на кнопку "Еще"
     const showMoreMoviesCard = () => {
-        if (widthWindow >= SCREEN_LARGE) {
-            setInitialMovies(initialMovies + 4)
-        } else if (widthWindow >= SCREEN_MEDIUM) {
-            setInitialMovies(initialMovies + 3)
+        if (widthWindow >= LARGE_SCREEN) {
+            setInitialMovies(initialMovies + MORE_MOVIES_ON_LARGE_SCREEN)
+        } else if (widthWindow >= MEDIUM_SCREEN) {
+            setInitialMovies(initialMovies + MORE_MOVIES_ON_MEDIUM_SCREEN)
         } else {
-            setInitialMovies(initialMovies + 2)
+            setInitialMovies(initialMovies + MORE_MOVIES_ON_SMALL_SCREEN)
         }
     }
 

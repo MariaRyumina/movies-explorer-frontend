@@ -17,6 +17,15 @@ import Preloader from '../Preloader/Preloader';
 import PopupInfo from '../PopupInfo/PopupInfo';
 import iconOK from '../../images/icon_ok.png';
 import iconError from '../../images/icon_error.png';
+import {
+    ERROR_AUTH_INCORRECT_DATA,
+    ERROR_CONFLICT_CODE,
+    ERROR_CONFLICT,
+    ERROR_NOT_FOUND_MOVIES,
+    ERROR_SERVER,
+    MOVIE_DURATION,
+    SUCCESSFUL_REGISTRATION,
+} from "../../utils/constants";
 
 function App() {
     const location = useLocation();
@@ -57,13 +66,10 @@ function App() {
         }
     },[loggedIn, valueMoviesInput])
 
-    //отслеживаю ширину окна
-    const handleResize = (e) => {
-        setWidthWindow(e.target.innerWidth)
-    }
-
-    //добавляю слушатель на resize window
+    //отслеживаю ширину окна, добавляю слушатель resize на window
     useEffect(() => {
+        const handleResize = (e) => setWidthWindow(e.target.innerWidth);
+
         window.addEventListener('resize', handleResize)
         return () => {
             window.removeEventListener('resize', handleResize)
@@ -93,18 +99,18 @@ function App() {
         mainApi.register( name, email, password )
             .then(res => {
                 if (res) {
-                    handleInfoPopup(iconOK, 'Вы успешно зарегистрированы');
+                    handleInfoPopup(iconOK, SUCCESSFUL_REGISTRATION);
                     handleOpenPopup();
                     handleAuthorization( email, password ) //после удачной регистрации автоматически авторизуется
                 }
             })
             .catch(err => {
-                if (err === 409) {
-                    handleInfoPopup(iconError, 'Пользователь с данным email уже зарегистрирован!');
+                if (err === ERROR_CONFLICT_CODE) {
+                    handleInfoPopup(iconError, ERROR_CONFLICT);
                     handleOpenPopup();
                     console.error(`Ошибка регистрации: ${err}`);
                 } else if (err) {
-                    handleInfoPopup(iconError, 'Что-то пошло не так! Попробуйте ещё раз.');
+                    handleInfoPopup(iconError, ERROR_SERVER);
                     handleOpenPopup();
                     console.error(`Ошибка регистрации: ${err}`);
                 }
@@ -121,7 +127,7 @@ function App() {
                 }
             })
             .catch(err => {
-                handleInfoPopup(iconError, 'Вы ввели неправильные имя или пароль');
+                handleInfoPopup(iconError, ERROR_AUTH_INCORRECT_DATA);
                 handleOpenPopup();
                 console.error(`Ошибка авторизации: ${err}`);
             })
@@ -141,12 +147,12 @@ function App() {
         mainApi.updateUserInfo({ name, email })
             .then(resultUser => setCurrentUser(resultUser))
             .catch(err => {
-                if (err === 409) {
-                    handleInfoPopup(iconError, 'Пользователь с данным email уже зарегистрирован!');
+                if (err === ERROR_CONFLICT_CODE) {
+                    handleInfoPopup(iconError, ERROR_CONFLICT);
                     handleOpenPopup();
                     console.error(`Ошибка отправки данных о пользователе на сервер: ${err}`)
                 } else if (err) {
-                    handleInfoPopup(iconError, 'Что-то пошло не так! Попробуйте ещё раз.');
+                    handleInfoPopup(iconError, ERROR_SERVER);
                     handleOpenPopup();
                     console.error(`Ошибка отправки данных о пользователе на сервер: ${err}`)
                 }
@@ -167,7 +173,8 @@ function App() {
 
     //загрузка фильмов со стороннего сервера
     function getBeatFilms() {
-        console.log("отработал getBeatFilms")
+        console.log("отработал getBeatFilms");
+
         showPreloader();
         moviesApi.getBeatFilmCardList()
             .then(movies => movies.map(movie => {
@@ -233,7 +240,7 @@ function App() {
         moviesList = moviesList ?? [];
 
         if (localStorage.getItem("isShortMovies") === "true") {
-            moviesList = moviesList.filter(movie => movie.duration <= 40);
+            moviesList = moviesList.filter(movie => movie.duration <= MOVIE_DURATION);
         }
 
         if (valueMoviesInput) {
@@ -242,7 +249,7 @@ function App() {
         }
 
         if (moviesList.length === 0) {
-            handleInfoPopup(iconError, 'Ничего не найдено');
+            handleInfoPopup(iconError, ERROR_NOT_FOUND_MOVIES);
             handleOpenPopup();
         }
 
@@ -287,6 +294,7 @@ function App() {
                 { ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname)
                     && <Header
                         loggedIn={loggedIn}
+                        widthWindow={widthWindow}
                     />
                 }
                 <div className="main">

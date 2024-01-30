@@ -1,7 +1,7 @@
 import React from 'react';
 import './preloader.css';
 
-const Preloader = ({ isOpen }) => {
+export default function Preloader ({ isOpen }) {
     return (
         <div className={`preloader ${!isOpen ? "preloader__hidden" : ""}`}>
             <div className="preloader__container">
@@ -10,5 +10,3 @@ const Preloader = ({ isOpen }) => {
         </div>
     )
 };
-
-export default Preloader;

@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react';
 import './login.css';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
+import {
+    ERROR_VALIDATION_INCORRECT_EMAIL,
+    ERROR_VALIDATION_INCORRECT_PASSWORD,
+    ERROR_VALIDATION_REQUIRED_FIELD,
+    REG_EXP_EMAIL,
+} from "../../utils/constants";
 
 export default function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
     const [passwordDirty, setPasswordDirty] = useState(false); //проверяет, был ли курсор в input
-    const [emailError, setEmailError] = useState('Обязательное поле'); //отображает текст ошибки
-    const [passwordError, setPasswordError] = useState('Обязательное поле'); //отображает текст ошибки
+    const [emailError, setEmailError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
+    const [passwordError, setPasswordError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
     const [formValid, setFormValid] = useState(false); //валидна форма или нет
 
     useEffect(() => {
@@ -23,12 +29,10 @@ export default function Login({ onLogin }) {
     const emailHandler = (e) => {
         setEmail(e.target.value);
 
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        if (!reg.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Введите корректный e-mail адрес');
+        if (!REG_EXP_EMAIL.test(String(e.target.value).toLowerCase())) {
+            setEmailError(ERROR_VALIDATION_INCORRECT_EMAIL);
             if (!e.target.value) {
-                setEmailError('Обязательное поле');
+                setEmailError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setEmailError('')
@@ -39,9 +43,9 @@ export default function Login({ onLogin }) {
         setPassword(e.target.value);
 
         if (e.target.value.length < 4) {
-            setPasswordError('Пароль должен быть длиннее 4 символов');
+            setPasswordError(ERROR_VALIDATION_INCORRECT_PASSWORD);
             if (!e.target.value) {
-                setPasswordError('Обязательное поле');
+                setPasswordError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setPasswordError('')

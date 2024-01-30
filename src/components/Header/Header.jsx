@@ -5,7 +5,10 @@ import logoImg from '../../images/logo.svg';
 import Navigation from "../Navigation/Navigation";
 import { Link } from "react-router-dom";
 
-export default function Header({ loggedIn }) {
+export default function Header({
+                                   loggedIn,
+                                   widthWindow,
+                               }) {
     const location = useLocation();
 
     return (
@@ -15,6 +18,7 @@ export default function Header({ loggedIn }) {
             </Link>
             <Navigation
                 loggedIn={loggedIn}
+                widthWindow={widthWindow}
             />
         </header>
     )

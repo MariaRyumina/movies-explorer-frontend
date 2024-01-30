@@ -2,6 +2,7 @@ import React from 'react';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import iconError from "../../images/icon_error.png";
+import {ERROR_VALIDATION_REQUIRED_NAME} from "../../utils/constants";
 
 export default function Movies({
                                    movies,
@@ -21,13 +22,13 @@ export default function Movies({
             if (valueInput !== "") {
                 moviesFiltration(JSON.parse(localStorage.getItem("movies")), setMovies);
             } else {
-                infoPopup(iconError, 'Введите название фильма!');
+                infoPopup(iconError, ERROR_VALIDATION_REQUIRED_NAME);
                 openPopup();
             }
         } else if (valueInput !== "") {
             getBeatFilms();
         } else {
-            infoPopup(iconError, 'Введите название фильма!');
+            infoPopup(iconError, ERROR_VALIDATION_REQUIRED_NAME);
             openPopup();
         }
     }

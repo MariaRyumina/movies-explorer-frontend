@@ -1,8 +1,16 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Link } from "react-router-dom";
 import iconOk from "../../images/icon_ok.png";
+import {
+    ERROR_VALIDATION_INCORRECT_EMAIL,
+    ERROR_VALIDATION_INCORRECT_NAME,
+    ERROR_VALIDATION_REQUIRED_FIELD,
+    REG_EXP_EMAIL,
+    SUCCESSFUL_UPDATE_USER_INFORMATION,
+    VALID_NAME_LENGTH,
+} from "../../utils/constants";
 
 export default function Profile({
                                     onUpdateUser,
@@ -37,10 +45,10 @@ export default function Profile({
     function handleChangeName (e) {
         setName(e.target.value);
 
-        if (e.target.value.length < 2) {
-            setNameError('Имя должно быть длиннее 2 символов');
+        if (e.target.value.length < VALID_NAME_LENGTH) {
+            setNameError(ERROR_VALIDATION_INCORRECT_NAME);
             if (!e.target.value) {
-                setNameError('Обязательное поле');
+                setNameError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setNameError('')
@@ -50,12 +58,10 @@ export default function Profile({
     function handleChangeEmail (e) {
         setEmail(e.target.value);
 
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        if (!reg.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Введите корректный e-mail адрес');
+        if (!REG_EXP_EMAIL.test(String(e.target.value).toLowerCase())) {
+            setEmailError(ERROR_VALIDATION_INCORRECT_EMAIL);
             if (!e.target.value) {
-                setEmailError('Обязательное поле');
+                setEmailError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setEmailError('')
@@ -78,7 +84,7 @@ export default function Profile({
     function handleSubmit (e) {
         e.preventDefault();
         onUpdateUser({ name, email })
-        infoPopup(iconOk, 'Данные успешно обновлены!');
+        infoPopup(iconOk, SUCCESSFUL_UPDATE_USER_INFORMATION);
         openPopup();
     }
 

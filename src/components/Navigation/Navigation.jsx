@@ -3,18 +3,12 @@ import './navigation.css';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import profileLogoImg from '../../images/icon_user.svg';
 
-export default function Navigation({ loggedIn }) {
-    const [width, setWidth] = React.useState(window.innerWidth);
+export default function Navigation({
+                                       loggedIn,
+                                       widthWindow,
+                                   }) {
     const [nav, setNav] = React.useState(false);
     const location = useLocation();
-
-    useEffect(() => {
-        const handleResize = (evt) => setWidth(evt.target.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    })
 
     return (
         <>
@@ -23,7 +17,7 @@ export default function Navigation({ loggedIn }) {
                     <button onClick={() => setNav(!nav)} className={nav ? "navigation__menu navigation__menu_active" : "navigation__menu"} />
                     <nav className={nav ? "navigation__auth navigation__auth_active" : "navigation__auth"}>
                         <div className="navigation__links-movies">
-                            { width < 769 &&
+                            { widthWindow < 769 &&
                                 <NavLink
                                     to="/"
                                     onClick={() => setNav(!nav)}
