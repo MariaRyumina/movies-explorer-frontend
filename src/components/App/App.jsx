@@ -21,25 +21,34 @@ import iconError from '../../images/icon_error.png';
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
+    //вошёл пользователь в систему или нет
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem("jwt") ?? false);
     const [currentUser, setCurrentUser] = useState({});
     const [isPreloader, setIsPreloader] = useState(false);
+    //ширина окна браузера
+    const [widthWindow, setWidthWindow] = useState(window.innerWidth);
     //иконка и текст в popup
     const [infoPopup, setInfoPopup] = useState({ img: null, title: null });
     const [isOpenPopup, setIsOpenPopup] = useState(false);
+
     //фильмы сохраненные в ЛС
-    const moviesLS = JSON.parse(localStorage.getItem('movies'));
+    // const moviesLS = JSON.parse(localStorage.getItem('movies'));
+
     //фильмы с сервера
-    const [movies, setMovies] = useState(moviesLS ?? []);
+    const [movies, setMovies] = useState([]);
+    //инпут на странице "Фильмы"
+    const [valueMoviesInput, setValueMoviesInput] = useState((localStorage.getItem('valueMoviesInput')) ?? '');
+    //короткометражки на странице "Фильмы"
+    const [isShortMovies, setIsShortMovies] = useState((JSON.parse(localStorage.getItem('isShortMovies'))) ?? false);
+    //указывает, был ли запрос на сервер и загружены ли "Фильмы"
+    const [isLoadedMovies, setIsLoadedMovies] = useState(false);
+
     //фильмы, добавленные в сохраненные
     const [savedMovies, setSavedMovies] = useState([]);
-    //вошёл пользователь в систему или нет
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem("jwt") ?? false);
-    //ширина окна браузера
-    const [widthWindow, setWidthWindow] = useState(window.innerWidth);
-    //инпут на странице с фильмами
-    const [valueMoviesInput, setValueMoviesInput] = useState((JSON.parse(localStorage.getItem('valueMoviesInput'))) || '');
-    //указывает, был ли запрос на сервер и загружены ли фильмы
-    const [isLoaded, setIsLoaded] = useState(false);
+    //инпут на странице "Сохраненные фильмы"
+    const [valueSavedMoviesInput, setValueSavedMoviesInput] = useState('');
+    //короткометражки на странице "Сохраненные фильмы"
+    const [isShortSavedMovies, setIsShortSavedMovies] = useState(false);
 
     //сохранение данных в ЛС
     useEffect(() => {
@@ -123,7 +132,7 @@ function App() {
         localStorage.clear();
         setValueMoviesInput('');
         setMovies([]);
-        setIsLoaded(false);
+        setIsLoadedMovies(false);
         setLoggedIn(false);
     }
 
@@ -172,7 +181,7 @@ function App() {
                 localStorage.setItem('movies', JSON.stringify(movies));
             })
             .then(() => {
-                setIsLoaded(true);
+                setIsLoadedMovies(true);
             })
             .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
             .finally(() => hidePreloader());
@@ -347,7 +356,7 @@ function App() {
                                     widthWindow={widthWindow}
                                     valueInput={valueMoviesInput}
                                     setValueInput={setValueMoviesInput}
-                                    isLoaded={isLoaded}
+                                    isLoaded={isLoadedMovies}
                                     moviesFiltration={moviesFiltration}
                                 />
                             }

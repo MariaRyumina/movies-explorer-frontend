@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import './moviesCardList.css';
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { SCREEN_LARGE, SCREEN_MEDIUM } from "../../utils/const-breakpoints";
+import { SCREEN_LARGE, SCREEN_MEDIUM, SCREEN_SMALL } from "../../utils/const-breakpoints";
 
 export default function MoviesCardList({
                                            movies,
@@ -18,6 +18,8 @@ export default function MoviesCardList({
         if (widthWindow >= SCREEN_LARGE) {
             setInitialMovies(16)
         } else if (widthWindow >= SCREEN_MEDIUM) {
+            setInitialMovies(9)
+        } else if (widthWindow >= SCREEN_SMALL) {
             setInitialMovies(8)
         } else {
             setInitialMovies(5)
@@ -29,7 +31,7 @@ export default function MoviesCardList({
         if (widthWindow >= SCREEN_LARGE) {
             setInitialMovies(initialMovies + 4)
         } else if (widthWindow >= SCREEN_MEDIUM) {
-            setInitialMovies(initialMovies + 2)
+            setInitialMovies(initialMovies + 3)
         } else {
             setInitialMovies(initialMovies + 2)
         }
