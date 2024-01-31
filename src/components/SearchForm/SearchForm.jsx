@@ -1,9 +1,9 @@
 import './searchForm.css';
 import iconSearch from '../../images/icon_search.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import iconError from "../../images/icon_error.png";
-import {ERROR_VALIDATION_REQUIRED_NAME} from "../../utils/constants";
+import { ERROR_VALIDATION_REQUIRED_NAME } from "../../utils/constants";
 
 export default function SearchForm({
                                        valueInput,
@@ -12,20 +12,25 @@ export default function SearchForm({
                                        setIsShortMovies,
                                        infoPopup,
                                        openPopup,
-                                       searchMovies,
                                    }) {
+    const [input, setInput] = useState("");
+
+    useEffect(() =>{
+        setInput(valueInput);
+    },[valueInput])
+
     function handleChangeInput(e) {
-        setValueInput(e.target.value);
+        setInput(e.target.value);
     }
 
     function handleSearch (e) {
         e.preventDefault();
 
-        if (valueInput === "") {
+        if (input === "") {
             infoPopup(iconError, ERROR_VALIDATION_REQUIRED_NAME);
             openPopup();
         } else {
-            searchMovies(valueInput);
+            setValueInput(input);
         }
     }
 
@@ -36,7 +41,7 @@ export default function SearchForm({
                     <img src={iconSearch} alt="иконка поиска" className="search__icon" />
                     <input
                         onChange={handleChangeInput}
-                        value={valueInput}
+                        value={input}
                         id="movie"
                         name="movie"
                         type="text"

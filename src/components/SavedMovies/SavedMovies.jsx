@@ -12,10 +12,6 @@ export default function SavedMovies({
                                         isShortMovies,
                                         setIsShortMovies,
                                     }) {
-    function searchMovies(valueInput) {
-        setValueInput(valueInput);
-    }
-
     return (
         <>
             <SearchForm
@@ -25,7 +21,6 @@ export default function SavedMovies({
                 setIsShortMovies={setIsShortMovies}
                 infoPopup={infoPopup}
                 openPopup={openPopup}
-                searchMovies={searchMovies}
             />
             <MoviesCardList
                 movies={movies}

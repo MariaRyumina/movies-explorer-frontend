@@ -165,7 +165,7 @@ function App() {
                 })
                 .catch(err => console.error(`Ошибка загрузки данных с сервера: ${err}`))
         }
-    }, [loggedIn, valueMoviesInput])
+    }, [loggedIn])
 
     //загрузка фильмов со стороннего сервера
     useEffect(() => {
@@ -194,8 +194,7 @@ function App() {
     }, [valueMoviesInput, isShortMovies])
 
     //фильтрация фильмов по поисковому запросу и checkbox (возвращает массив отфильтрованных фильмов)
-    function moviesFiltration (movies, valueInput, isShort) {
-
+    function moviesFiltration(movies, valueInput, isShort) {
         return movies.filter(movie => (isShort ? movie.duration <= MOVIE_DURATION : movie)
             && (movie.nameRU.toLowerCase().includes(valueInput.toLowerCase())
                 || movie.nameEN.toLowerCase().includes(valueInput.toLowerCase()))
