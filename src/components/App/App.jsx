@@ -41,7 +41,7 @@ function App() {
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
     //фильмы с сервера
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('movies')) ?? []);
     //input на странице "Фильмы"
     const [valueMoviesInput, setValueMoviesInput] = useState((localStorage.getItem('valueMoviesInput')) ?? '');
     //короткометражки на странице "Фильмы"
@@ -170,6 +170,9 @@ function App() {
     //загрузка фильмов со стороннего сервера
     useEffect(() => {
         if (valueMoviesInput.length > 0) {
+
+            console.log(movies.length);
+
             if (movies.length !== 0) {
                 setMovies(JSON.parse(localStorage.getItem('movies')));
                 setValueMoviesInput(localStorage.getItem('valueMoviesInput'));
