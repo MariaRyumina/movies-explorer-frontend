@@ -21,8 +21,8 @@ export default function Profile({
     const [showEditBtn, setShowEditBtn] = useState(true);
     const [showSaveBtn, setShowSaveBtn] = useState(false);
     const currentUser = useContext(CurrentUserContext);
-    const [name, setName] = useState(currentUser.name);
-    const [email, setEmail] = useState(currentUser.email);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
     const [nameDirty, setNameDirty] = useState(false); //проверяет, был ли курсор в input
     const [emailError, setEmailError] = useState(''); //отображает текст ошибки
@@ -99,6 +99,8 @@ export default function Profile({
         }
     }
 
+    const dateChange = name !== currentUser.name || email !== currentUser.email;
+
     return (
         <section className="profile">
             <p className="profile__title">Привет, {name}!</p>
@@ -161,7 +163,7 @@ export default function Profile({
                 </div>
 
                 <button
-                    disabled={!formValid}
+                    disabled={!formValid || !dateChange}
                     type="submit"
                     onClick={handleSave}
                     className={ showSaveBtn ? "profile__btn-save" : "profile__btn-save profile__btn-save_hidden"}
