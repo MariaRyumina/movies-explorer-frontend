@@ -2,22 +2,31 @@ import './searchForm.css';
 import iconSearch from '../../images/icon_search.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import React from "react";
+import iconError from "../../images/icon_error.png";
+import {ERROR_VALIDATION_REQUIRED_NAME} from "../../utils/constants";
 
 export default function SearchForm({
                                        valueInput,
                                        setValueInput,
+                                       isShortMovies,
+                                       setIsShortMovies,
+                                       infoPopup,
+                                       openPopup,
                                        searchMovies,
-                                       moviesFiltration,
-                                       setMovies,
-                                       movies,
                                    }) {
-    function handleChangeInput (e) {
-        setValueInput(e.target.value)
+    function handleChangeInput(e) {
+        setValueInput(e.target.value);
     }
 
-    function getFilms (e) {
+    function handleSearch (e) {
         e.preventDefault();
-        searchMovies();
+
+        if (valueInput === "") {
+            infoPopup(iconError, ERROR_VALIDATION_REQUIRED_NAME);
+            openPopup();
+        } else {
+            searchMovies(valueInput);
+        }
     }
 
     return (
@@ -36,15 +45,14 @@ export default function SearchForm({
                     />
                     <button
                         className="search__btn"
-                        onClick={getFilms}
+                        onClick={handleSearch}
                     >
                         Найти
                     </button>
                 </form>
                 <FilterCheckbox
-                    moviesFiltration={moviesFiltration}
-                    setMovies={setMovies}
-                    movies={movies}
+                    isShortMovies={isShortMovies}
+                    setIsShortMovies={setIsShortMovies}
                 />
             </div>
         </section>

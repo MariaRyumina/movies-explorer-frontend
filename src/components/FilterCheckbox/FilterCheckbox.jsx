@@ -1,20 +1,18 @@
 import './filterCheckbox.css';
 
 export default function FilterCheckbox({
-                                           moviesFiltration,
-                                           setMovies,
-                                           movies,
+                                           isShortMovies,
+                                           setIsShortMovies,
                                        }) {
     function handleChangeCheckbox (e) {
-        localStorage.setItem("isShortMovies", e.target.checked)
-        moviesFiltration(movies, setMovies);
+        setIsShortMovies(e.target.checked);
     }
 
     return (
         <div className="filter-checkbox">
             <label className="checkbox">
                 <input
-                    checked={localStorage.getItem("isShortMovies") === "true"}
+                    checked={isShortMovies}
                     onChange={handleChangeCheckbox}
                     type="checkbox"
                     className="checkbox__input"

@@ -34,6 +34,24 @@ export default function Profile({
         setEmail(currentUser.email)
     }, [setName, currentUser.name, setEmail, currentUser.email]);
 
+    function handleSubmit (e) {
+        e.preventDefault();
+        onUpdateUser({ name, email })
+        infoPopup(iconOk, SUCCESSFUL_UPDATE_USER_INFORMATION);
+        openPopup();
+    }
+
+    function handleEdit () {
+        setShowEditBtn(false);
+        setShowSaveBtn(true);
+    }
+
+    function handleSave () {
+        setShowSaveBtn(false);
+        setShowEditBtn(true);
+    }
+
+    //валидация
     useEffect(() => {
         if (emailError || nameError) {
             setFormValid(false)
@@ -79,23 +97,6 @@ export default function Profile({
             default:
                 console.error('для поля не добавлен эффект blur')
         }
-    }
-
-    function handleSubmit (e) {
-        e.preventDefault();
-        onUpdateUser({ name, email })
-        infoPopup(iconOk, SUCCESSFUL_UPDATE_USER_INFORMATION);
-        openPopup();
-    }
-
-    function handleEdit () {
-        setShowEditBtn(false);
-        setShowSaveBtn(true);
-    }
-
-    function handleSave () {
-        setShowSaveBtn(false);
-        setShowEditBtn(true);
     }
 
     return (
