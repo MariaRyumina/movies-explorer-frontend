@@ -38,7 +38,7 @@ export default function Movies({
         } else {
             setInitialMovies(INITIAL_MOVIES_ON_X_SMALL_SCREEN)
         }
-    }, [widthWindow])
+    }, [widthWindow, valueInput, isShortMovies])
 
     //изменение количества отображаемых карточек нажатием на кнопку "Еще"
     const showMoreMoviesCard = () => {

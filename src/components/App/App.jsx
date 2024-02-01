@@ -42,8 +42,6 @@ function App() {
 
     //фильмы с сервера (все 100 фильмов)
     const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) ?? []);
-    //отфильтрованные фильмы
-    const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem('foundMovies')) ?? []);
     //input на странице "Фильмы"
     const [valueMoviesInput, setValueMoviesInput] = useState((localStorage.getItem('valueMoviesInput')) ?? '');
     //короткометражки на странице "Фильмы"
@@ -135,7 +133,6 @@ function App() {
         localStorage.clear();
         setValueMoviesInput('');
         setAllMovies([]);
-        setFoundMovies([]);
         setIsShortMovies(false);
         setLoggedIn(false);
         setValueSavedMoviesInput('');
