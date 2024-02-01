@@ -24,7 +24,7 @@ export default function SearchForm({
     }
 
     function handleSearch (e) {
-        e.preventDefault();
+        if(e) e.preventDefault();
 
         if (input === "") {
             infoPopup(iconError, ERROR_VALIDATION_REQUIRED_NAME);
@@ -58,6 +58,7 @@ export default function SearchForm({
                 <FilterCheckbox
                     isShortMovies={isShortMovies}
                     setIsShortMovies={setIsShortMovies}
+                    onSearch={handleSearch}
                 />
             </div>
         </section>

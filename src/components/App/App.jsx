@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import debounce from 'lodash.debounce';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -39,8 +40,10 @@ function App() {
     const [infoPopup, setInfoPopup] = useState({ img: null, title: null });
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
-    //фильмы с сервера
-    const [movies, setMovies] = useState(JSON.parse(localStorage.getItem('movies')) ?? []);
+    //фильмы с сервера (все 100 фильмов)
+    const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) ?? []);
+    //отфильтрованные фильмы
+    const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem('foundMovies')) ?? []);
     //input на странице "Фильмы"
     const [valueMoviesInput, setValueMoviesInput] = useState((localStorage.getItem('valueMoviesInput')) ?? '');
     //короткометражки на странице "Фильмы"
@@ -63,7 +66,7 @@ function App() {
 
     //отслеживаю ширину окна, добавляю слушатель resize на window
     useEffect(() => {
-        const handleResize = (e) => setWidthWindow(e.target.innerWidth);
+        const handleResize = debounce((e) => setWidthWindow(e.target.innerWidth), 100);
 
         window.addEventListener('resize', handleResize)
         return () => {
@@ -131,9 +134,12 @@ function App() {
     function handleLogout () {
         localStorage.clear();
         setValueMoviesInput('');
-        setMovies([]);
+        setAllMovies([]);
+        setFoundMovies([]);
         setIsShortMovies(false);
         setLoggedIn(false);
+        setValueSavedMoviesInput('');
+        setIsShortSavedMovies(false);
     }
 
     //загрузка обновленной информации о пользователе на сервер
@@ -169,8 +175,8 @@ function App() {
     //загрузка фильмов со стороннего сервера
     useEffect(() => {
         if (valueMoviesInput.length > 0) {
-            if (movies.length !== 0) {
-                setMovies(JSON.parse(localStorage.getItem('movies')));
+            if (allMovies.length !== 0) {
+                setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
                 setValueMoviesInput(localStorage.getItem('valueMoviesInput'));
                 setIsShortMovies(JSON.parse(localStorage.getItem('isShortMovies')));
             } else {
@@ -183,8 +189,8 @@ function App() {
                         return movie;
                     }))
                     .then(movies => {
-                        setMovies(movies);
-                        localStorage.setItem('movies', JSON.stringify(movies));
+                        setAllMovies(movies);
+                        localStorage.setItem('allMovies', JSON.stringify(movies));
                     })
                     .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
                     .finally(() => hidePreloader());
@@ -207,7 +213,7 @@ function App() {
 
             mainApi.deleteMovie(savedMovie._id)
                 .then(() => {
-                    movies.forEach(m => {
+                    allMovies.forEach(m => {
                         if(m.movieId === movie.movieId)
                             m.isLiked = false
                     })
@@ -218,7 +224,7 @@ function App() {
         } else {
             mainApi.saveMovie(movie)
                 .then(movie => {
-                    movies.forEach(m => {
+                    allMovies.forEach(m => {
                         if(m.movieId === movie.movieId)
                             m.isLiked = true
                     })
@@ -232,7 +238,7 @@ function App() {
     function handleDeleteMovie (savedMovie) {
         mainApi.deleteMovie(savedMovie._id)
             .then(() => {
-                movies.forEach(m => {
+                allMovies.forEach(m => {
                     if(m.movieId === savedMovie.movieId)
                         m.isLiked = false
                 })
@@ -339,7 +345,7 @@ function App() {
                                     loggedIn={loggedIn}
                                     setLoggedIn={setLoggedIn}
                                     element={Movies}
-                                    movies={moviesFiltration(movies, valueMoviesInput, isShortMovies)}
+                                    movies={moviesFiltration(allMovies, valueMoviesInput, isShortMovies)}
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
                                     onSaveMovie={handleSaveMovie}

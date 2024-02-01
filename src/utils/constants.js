@@ -10,7 +10,7 @@ export const MORE_MOVIES_ON_SMALL_SCREEN = 2;
 
 //отображаемое количество фильмов, ДО нажатия на кнопку "Еще"
 export const INITIAL_MOVIES_ON_LARGE_SCREEN = 16;
-export const INITIAL_MOVIES_ON_MEDIUM_SCREEN = 9;
+export const INITIAL_MOVIES_ON_MEDIUM_SCREEN = 12;
 export const INITIAL_MOVIES_ON_SMALL_SCREEN = 8;
 export const INITIAL_MOVIES_ON_X_SMALL_SCREEN = 5;
 

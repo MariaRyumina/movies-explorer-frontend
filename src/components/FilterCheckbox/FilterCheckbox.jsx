@@ -3,9 +3,11 @@ import './filterCheckbox.css';
 export default function FilterCheckbox({
                                            isShortMovies,
                                            setIsShortMovies,
+                                           onSearch,
                                        }) {
     function handleChangeCheckbox (e) {
         setIsShortMovies(e.target.checked);
+        onSearch();
     }
 
     return (
