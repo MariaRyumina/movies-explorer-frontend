@@ -7,6 +7,14 @@
     display: grid;
 }
 
+.moviesCardList__not-found {
+    margin: 0;
+    color: #EE3465;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .moviesCardList__more {
     align-self: center;
     margin: 60px auto 80px;

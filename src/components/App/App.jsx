@@ -21,7 +21,6 @@ import {
     ERROR_AUTH_INCORRECT_DATA,
     ERROR_CONFLICT_CODE,
     ERROR_CONFLICT,
-    ERROR_NOT_FOUND_MOVIES,
     ERROR_SERVER,
     MOVIE_DURATION,
     SUCCESSFUL_REGISTRATION,
@@ -170,9 +169,6 @@ function App() {
     //загрузка фильмов со стороннего сервера
     useEffect(() => {
         if (valueMoviesInput.length > 0) {
-
-            console.log(movies.length);
-
             if (movies.length !== 0) {
                 setMovies(JSON.parse(localStorage.getItem('movies')));
                 setValueMoviesInput(localStorage.getItem('valueMoviesInput'));

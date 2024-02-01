@@ -9,22 +9,25 @@ export default function MoviesCardList({
                                            onDeleteMovie,
                                            hideButtonMoreMovies,
                                            showMoreMoviesCard,
+                                           valueInput,
                                        }) {
     const location = useLocation();
 
     return (
         <section className="moviesCardList">
             <div className="moviesCardList__movies">
-                {
-                    movies
-                        .map(movie => (
-                    <MoviesCard
-                        key={movie.movieId}
-                        movie={movie}
-                        onSaveMovie={onSaveMovie}
-                        onDeleteMovie={onDeleteMovie}
-                    />
-                ))}
+                {movies.length === 0 && valueInput !== ''  ? (
+                    <p className="moviesCardList__not-found">Ничего не найдено</p>
+                ) : (
+                        movies.map(movie => (
+                            <MoviesCard
+                                key={movie.movieId}
+                                movie={movie}
+                                onSaveMovie={onSaveMovie}
+                                onDeleteMovie={onDeleteMovie}
+                            />
+                        ))
+                )}
             </div>
             
             { location.pathname === '/movies' && hideButtonMoreMovies() &&

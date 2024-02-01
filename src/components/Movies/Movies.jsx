@@ -11,7 +11,7 @@ import {
     MORE_MOVIES_ON_LARGE_SCREEN,
     MORE_MOVIES_ON_MEDIUM_SCREEN,
     MORE_MOVIES_ON_SMALL_SCREEN,
-    SMALL_SCREEN
+    SMALL_SCREEN,
 } from "../../utils/constants";
 
 export default function Movies({
@@ -75,6 +75,7 @@ export default function Movies({
                 initialMovies={initialMovies}
                 showMoreMoviesCard={showMoreMoviesCard}
                 hideButtonMoreMovies={hideButtonMoreMovies}
+                valueInput={valueInput}
             />
         </section>
     )
