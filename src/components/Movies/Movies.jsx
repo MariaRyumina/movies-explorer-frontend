@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import {
@@ -24,6 +24,7 @@ export default function Movies({
                                    setValueInput,
                                    isShortMovies,
                                    setIsShortMovies,
+                                   isLoading,
                                }) {
     const [initialMovies, setInitialMovies] = useState(0); //начальное количество отображаемых фильмов, до нажатия на кнопку "Еще"
 
@@ -67,6 +68,7 @@ export default function Movies({
                 setIsShortMovies={setIsShortMovies}
                 infoPopup={infoPopup}
                 openPopup={openPopup}
+                isLoading={isLoading}
             />
             <MoviesCardList
                 movies={movies.slice(0, initialMovies)}

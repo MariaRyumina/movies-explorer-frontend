@@ -14,7 +14,7 @@ export default function AboutMe() {
                         Сейчас учусь на веб-разработчика.
                         Люблю слушать музыку, танцевать, спорт, мотоциклы и шить. Главное в жизни - саморазвитие.
                     </p>
-                    <a href="https://github.com/MariaRyumina" rel="noopener noreferrer" className="aboutMe__github-link">Github</a>
+                    <a href="https://github.com/MariaRyumina" target="_blank" rel="noopener noreferrer" className="aboutMe__github-link">Github</a>
                 </div>
                 <img src={imgMe} alt="аватар" className="aboutMe__avatar" />
             </div>

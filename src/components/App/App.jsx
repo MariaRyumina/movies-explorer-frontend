@@ -33,7 +33,10 @@ function App() {
     //вошёл пользователь в систему или нет
     const [loggedIn, setLoggedIn] = useState(localStorage.getItem("jwt") ?? false);
     const [currentUser, setCurrentUser] = useState({});
+
     const [isPreloader, setIsPreloader] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     //ширина окна браузера
     const [widthWindow, setWidthWindow] = useState(window.innerWidth);
     //иконка и текст в popup
@@ -42,13 +45,15 @@ function App() {
 
     //фильмы с сервера (все 100 фильмов)
     const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) ?? []);
+    //найденные отфильтрованные фильмы
+    const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem('foundMovies')) ?? []);
     //input на странице "Фильмы"
     const [valueMoviesInput, setValueMoviesInput] = useState((localStorage.getItem('valueMoviesInput')) ?? '');
     //короткометражки на странице "Фильмы"
     const [isShortMovies, setIsShortMovies] = useState(JSON.parse(localStorage.getItem('isShortMovies')) ?? false);
 
     //фильмы, добавленные в сохраненные
-    const [savedMovies, setSavedMovies] = useState([]);
+    const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
     //input на странице "Сохраненные фильмы"
     const [valueSavedMoviesInput, setValueSavedMoviesInput] = useState('');
     //короткометражки на странице "Сохраненные фильмы"
@@ -57,10 +62,17 @@ function App() {
     //сохранение данных в ЛС
     useEffect(() => {
         if (loggedIn) {
+            localStorage.setItem('allMovies', JSON.stringify(allMovies));
             localStorage.setItem('valueMoviesInput', valueMoviesInput);
             localStorage.setItem('isShortMovies', JSON.stringify(isShortMovies));
+
+            const foundFilms = moviesFiltration(allMovies, valueMoviesInput, isShortMovies);
+            const saved = handleCheckLike(foundFilms, savedMovies);
+
+            localStorage.setItem('foundMovies', JSON.stringify(saved));
+            setFoundMovies(saved);
         }
-    },[loggedIn, valueMoviesInput, isShortMovies])
+    },[loggedIn, valueMoviesInput, isShortMovies, allMovies, savedMovies])
 
     //отслеживаю ширину окна, добавляю слушатель resize на window
     useEffect(() => {
@@ -137,6 +149,7 @@ function App() {
         setLoggedIn(false);
         setValueSavedMoviesInput('');
         setIsShortSavedMovies(false);
+        setFoundMovies([]);
     }
 
     //загрузка обновленной информации о пользователе на сервер
@@ -157,17 +170,37 @@ function App() {
     }
 
     //загрузка текущей информации о пользователе с сервера
-    //получение списка сохраненных фильмов
     useEffect(() => {
         if(loggedIn) {
-            Promise.all([mainApi.getUserInfo(), mainApi.getSavedMoviesList()])
-                .then(([resultUser, savedMovies]) => {
-                    setCurrentUser(resultUser)
-                    setSavedMovies(savedMovies.reverse())
-                })
+            mainApi.getUserInfo()
+                .then(resultUser => setCurrentUser(resultUser))
                 .catch(err => console.error(`Ошибка загрузки данных с сервера: ${err}`))
         }
     }, [loggedIn])
+
+    //получение списка сохраненных фильмов
+    useEffect(() => {
+        if(loggedIn) {
+            mainApi.getSavedMoviesList()
+                .then(savedMovies => {
+                    savedMovies.map(saved => saved.isLiked = true);
+
+                    setSavedMovies(savedMovies.reverse());
+                })
+        }
+    }, [loggedIn])
+
+    useEffect(() => {
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+    }, [savedMovies])
+
+    //добавляю новые свойство isLiked (true or false)
+    function handleCheckLike (movies, saved) {
+        return movies.map(m => {
+            m.isLiked = saved.some(s => s.movieId === m.movieId);
+            return m;
+        })
+    }
 
     //загрузка фильмов со стороннего сервера
     useEffect(() => {
@@ -176,18 +209,20 @@ function App() {
                 setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
                 setValueMoviesInput(localStorage.getItem('valueMoviesInput'));
                 setIsShortMovies(JSON.parse(localStorage.getItem('isShortMovies')));
+                setFoundMovies(JSON.parse(localStorage.getItem('foundMovies')));
             } else {
                 showPreloader();
                 moviesApi.getBeatFilmCardList()
                     .then(movies => movies.map(movie => {
-                        if (savedMovies.some(saved => saved.movieId === movie.movieId)) {
-                            movie.isLiked = true;
-                        }
+                        movie.isLiked = savedMovies.some(saved => saved.movieId === movie.movieId);
                         return movie;
                     }))
                     .then(movies => {
                         setAllMovies(movies);
                         localStorage.setItem('allMovies', JSON.stringify(movies));
+
+                        setFoundMovies(moviesFiltration(movies, valueMoviesInput, isShortMovies));
+                        localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
                     })
                     .catch(err => console.error(`Ошибка загрузки фильмов с сервера: ${err}`))
                     .finally(() => hidePreloader());
@@ -214,17 +249,19 @@ function App() {
                         if(m.movieId === movie.movieId)
                             m.isLiked = false
                     })
+                    setAllMovies(allMovies);
                     setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.movieId))
                 })
-                .catch(err => console.log(`Ошибка удаления фильма из избранного: ${err}`))
-
+                .catch(err => console.error(`Ошибка удаления фильма из избранного: ${err}`))
         } else {
             mainApi.saveMovie(movie)
                 .then(movie => {
                     allMovies.forEach(m => {
-                        if(m.movieId === movie.movieId)
+                        if (m.movieId === movie.movieId) {
                             m.isLiked = true
+                        }
                     })
+                    setAllMovies(allMovies);
                     setSavedMovies([movie, ...savedMovies])
                 })
                 .catch(err => console.error(`Ошибка сохранения фильма в избранное: ${err}`))
@@ -239,9 +276,9 @@ function App() {
                     if(m.movieId === savedMovie.movieId)
                         m.isLiked = false
                 })
-                setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.movieId))
+                setSavedMovies(movie => movie.filter(m => m.movieId !== savedMovie.movieId));
             })
-            .catch(err => console.log(`Ошибка удаления фильма из избранного: ${err}`))
+            .catch(err => console.error(`Ошибка удаления фильма из избранного: ${err}`))
     }
 
     //изменение картинки и сообщения в InfoPopup
@@ -269,10 +306,12 @@ function App() {
 
     function showPreloader () {
         setIsPreloader(true);
+        setIsLoading(true);
     }
 
     function hidePreloader () {
         setIsPreloader(false);
+        setIsLoading(false);
     }
 
     return (
@@ -342,7 +381,7 @@ function App() {
                                     loggedIn={loggedIn}
                                     setLoggedIn={setLoggedIn}
                                     element={Movies}
-                                    movies={moviesFiltration(allMovies, valueMoviesInput, isShortMovies)}
+                                    movies={foundMovies}
                                     infoPopup={handleInfoPopup}
                                     openPopup={handleOpenPopup}
                                     onSaveMovie={handleSaveMovie}
@@ -351,6 +390,7 @@ function App() {
                                     setValueInput={setValueMoviesInput}
                                     isShortMovies={isShortMovies}
                                     setIsShortMovies={setIsShortMovies}
+                                    isLoading={isLoading}
                                 />
                             }
                         />

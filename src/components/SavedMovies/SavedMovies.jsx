@@ -25,6 +25,7 @@ export default function SavedMovies({
             <MoviesCardList
                 movies={movies}
                 onDeleteMovie={onDeleteMovie}
+                valueInput={valueInput}
             />
         </>
     )

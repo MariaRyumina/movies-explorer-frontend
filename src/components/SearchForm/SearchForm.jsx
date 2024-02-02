@@ -12,6 +12,7 @@ export default function SearchForm({
                                        setIsShortMovies,
                                        infoPopup,
                                        openPopup,
+                                       isLoading,
                                    }) {
     const [input, setInput] = useState("");
 
@@ -40,6 +41,7 @@ export default function SearchForm({
                 <form className="search__form">
                     <img src={iconSearch} alt="иконка поиска" className="search__icon" />
                     <input
+                        disabled={!isLoading ? false : true}
                         onChange={handleChangeInput}
                         value={input}
                         id="movie"
