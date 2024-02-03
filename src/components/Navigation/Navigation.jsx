@@ -1,56 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './navigation.css';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import profileLogoImg from '../../images/icon_user.svg';
 
-export default function Navigation() {
-    const [loggedIn, setLoggedIn] = React.useState(true); //вошёл пользователь в систему или нет
-    const [width, setWidth] = React.useState(window.innerWidth);
+export default function Navigation({
+                                       loggedIn,
+                                       widthWindow,
+                                   }) {
     const [nav, setNav] = React.useState(false);
     const location = useLocation();
 
-    React.useEffect(() => {
-        const handleResize = (evt) => setWidth(evt.target.innerWidth);
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    })
-
     return (
         <>
-            {loggedIn ? (
+            { loggedIn ? (
                 <nav className="navigation">
-                    <button onClick={() => setNav(!nav)} className={nav ? "navigation__menu_active" : "navigation__menu"} />
-                    <nav className={nav ? "navigation__auth_active" : "navigation__auth"}>
+                    <button onClick={() => setNav(!nav)} className={nav ? "navigation__menu navigation__menu_active" : "navigation__menu"} />
+                    <nav className={nav ? "navigation__auth navigation__auth_active" : "navigation__auth"}>
                         <div className="navigation__links-movies">
-                            { width < 769 &&
-                                <Link
+                            { widthWindow < 769 &&
+                                <NavLink
                                     to="/"
                                     onClick={() => setNav(!nav)}
                                     className={ location.pathname === '/' ? "navigation__link-movies navigation__link-movies_active" : "navigation__link-movies" }
                                 >
                                     Главная
-                                </Link>
+                                </NavLink>
                             }
-                            <Link
+                            <NavLink
                                 to="/movies"
                                 onClick={() => setNav(!nav)}
                                 className={ location.pathname === '/movies' ? "navigation__link-movies navigation__link-movies_active" : "navigation__link-movies" }
                             >
                                 Фильмы
-                            </Link>
-                            <Link
+                            </NavLink>
+                            <NavLink
                                 to="/saved-movies"
                                 onClick={() => setNav(!nav)}
                                 className={ location.pathname === '/saved-movies' ? "navigation__link-movies navigation__link-movies_active" : "navigation__link-movies" }
                             >
                                 Сохранённые фильмы
-                            </Link>
+                            </NavLink>
                         </div>
-                        <Link
+                        <NavLink
                             to="/profile"
                             onClick={() => setNav(!nav)}
                             className="navigation__links-profile"
@@ -65,7 +56,7 @@ export default function Navigation() {
                                 alt="лого аккаунта"
                                 className="navigation__logo-profile"
                             />
-                        </Link>
+                        </NavLink>
                     </nav>
                     <div className={nav ? "navigation__background" : ""} />
                 </nav>
@@ -74,7 +65,7 @@ export default function Navigation() {
                     <Link to="/signup" className="navigation__signup">Регистрация</Link>
                     <Link to="/signin" className="navigation__signin">Войти</Link>
                 </nav>
-            )}
+            ) }
         </>
     )
 }

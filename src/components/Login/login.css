@@ -33,7 +33,6 @@
     padding-top: 6px;
     color: #EE3465;
     font-size: 10px;
-    font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
@@ -51,6 +50,14 @@
     font-size: 10px;
     font-weight: 400;
     line-height: normal;
+}
+
+.login__input:-webkit-autofill,
+.login__input:-webkit-autofill:hover,
+.login__input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 40rem #202020 inset;
+    caret-color: #fff;
 }
 
 .login__input {

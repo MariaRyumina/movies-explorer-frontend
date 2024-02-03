@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './login.css';
 import logo from '../../images/logo.svg';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import {
+    ERROR_VALIDATION_INCORRECT_EMAIL,
+    ERROR_VALIDATION_INCORRECT_PASSWORD,
+    ERROR_VALIDATION_REQUIRED_FIELD,
+    REG_EXP_EMAIL,
+} from "../../utils/constants";
 
-export default function Login() {
+export default function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [emailDirty, setEmailDirty] = useState(false);
-    const [passwordDirty, setPasswordDirty] = useState(false);
-    const [emailError, setEmailError] = useState('Поле "E-mail" должно быть заполнено!');
-    const [passwordError, setPasswordError] = useState('Поле "Пароль" должно быть заполнено!');
-    const [formValid, setFormValid] = useState(false);
+    const [emailDirty, setEmailDirty] = useState(false); //проверяет, был ли курсор в input
+    const [passwordDirty, setPasswordDirty] = useState(false); //проверяет, был ли курсор в input
+    const [emailError, setEmailError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
+    const [passwordError, setPasswordError] = useState(ERROR_VALIDATION_REQUIRED_FIELD); //отображает текст ошибки
+    const [formValid, setFormValid] = useState(false); //валидна форма или нет
 
     useEffect(() => {
         if (emailError || passwordError) {
@@ -22,11 +28,11 @@ export default function Login() {
 
     const emailHandler = (e) => {
         setEmail(e.target.value);
-        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!reg.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Поле "E-mail" имеет неправильный формат');
+
+        if (!REG_EXP_EMAIL.test(String(e.target.value).toLowerCase())) {
+            setEmailError(ERROR_VALIDATION_INCORRECT_EMAIL);
             if (!e.target.value) {
-                setEmailError('Поле "E-mail" должно быть заполнено!');
+                setEmailError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setEmailError('')
@@ -35,25 +41,37 @@ export default function Login() {
 
     const passwordHandler = (e) => {
         setPassword(e.target.value);
+
         if (e.target.value.length < 4) {
-            setPasswordError('Пароль должен быть длиннее 4 символов');
+            setPasswordError(ERROR_VALIDATION_INCORRECT_PASSWORD);
             if (!e.target.value) {
-                setPasswordError('Поле "Пароль" должно быть заполнено!');
+                setPasswordError(ERROR_VALIDATION_REQUIRED_FIELD);
             }
         } else {
             setPasswordError('')
         }
     }
 
+    //blurHandle срабатывает, когда пользователь покинул поле ввода
     const blurHandle = (e) => {
-        switch (e.target.name) {
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'password':
-                setPasswordDirty(true)
-                break
+        const attributeName = e.target.name;
+
+        if (attributeName === 'email') {
+            setEmailDirty(true);
+            return;
         }
+
+        if (attributeName === 'password') {
+            setPasswordDirty(true)
+            return;
+        }
+
+        console.error(`не добавлено в функцию blurHandle input ${attributeName}`);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        onLogin( email, password );
     }
 
     return (
@@ -62,7 +80,7 @@ export default function Login() {
                 <img src={logo} alt="лого" />
             </Link>
             <p className="login__title">Рады видеть!</p>
-            <form className="login__form" noValidate>
+            <form onSubmit={handleSubmit} className="login__form" noValidate>
                 <label className="login__label">
                     <span className="login__input-title">E-mail</span>
                     <input
@@ -70,6 +88,7 @@ export default function Login() {
                         id="login-email"
                         type="email"
                         name="email"
+                        placeholder="Введите email"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => emailHandler(e)}
@@ -86,6 +105,7 @@ export default function Login() {
                         id="login-password"
                         type="password"
                         name="password"
+                        placeholder="Введите пароль"
                         onBlur={e => blurHandle(e)}
                         required
                         onChange={e => passwordHandler(e)}

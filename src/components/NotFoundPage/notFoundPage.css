@@ -33,6 +33,10 @@
     line-height: normal;
 }
 
+.notFoundPage__back:hover {
+    opacity: .8;
+}
+
 @media screen and (max-width: 768px) {
     .notFoundPage {
         padding: 408px 0 232px;

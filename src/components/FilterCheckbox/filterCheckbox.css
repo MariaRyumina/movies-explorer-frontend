@@ -5,6 +5,7 @@
 
 .checkbox {
     display: inline-block;
+    cursor: pointer;
 }
 
 .checkbox__input {
@@ -43,12 +44,12 @@
     top: -1.5px;
     width: 36px;
     height: 20px;
-    background-image: url("../../images/checkbox_on.svg");
+    background-image: url("../../images/checkbox_off.svg");
     transition: background-image .3s, left .2s;
 }
 
 .checkbox__input:checked + .checkbox__span:after {
-    background-image: url("../../images/checkbox_off.svg");
+    background-image: url("../../images/checkbox_on.svg");
 }
 
 @media screen and (max-width: 768px) {

@@ -53,6 +53,14 @@
     line-height: normal;
 }
 
+.register__input:-webkit-autofill,
+.register__input:-webkit-autofill:hover,
+.register__input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 40rem #202020 inset;
+    caret-color: #fff;
+}
+
 .register__input {
     padding: 4px 0 9px;
     border: none;
@@ -67,7 +75,7 @@
 }
 
 .register__input:focus {
-    border-bottom: 1px solid #4285F4;;
+    border-bottom: 1px solid #4285F4;
 }
 
 .register__button {
